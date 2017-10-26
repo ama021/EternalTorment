@@ -1,6 +1,7 @@
 package com.example.jisaaa3.eternaltorment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -40,7 +41,8 @@ public class MainMenuFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 //Start game
-                Toast.makeText(getActivity(), "Game started", Toast.LENGTH_LONG);
+                Intent intent = new Intent(getActivity(), GameActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -49,7 +51,8 @@ public class MainMenuFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 //Go to Armory
-                Toast.makeText(getActivity(), "Going to armory", Toast.LENGTH_LONG);
+                Intent intent = new Intent(getActivity(), ArmoryActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -64,11 +67,8 @@ public class MainMenuFragment extends Fragment {
                 newFragment.setArguments(bundle);
 
                 ((MainActivity)getActivity()).switchFragment(mFragmentContainer, newFragment);
-                Toast.makeText(getActivity(), "Switching fragments", Toast.LENGTH_LONG);
             }
         });
-
-
 
         return v;
     }
