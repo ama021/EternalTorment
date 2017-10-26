@@ -4,6 +4,7 @@ package com.example.jisaaa3.eternaltorment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,8 @@ public class MainMenuFragment extends Fragment {
     private Button mArmoryButton;
     private Button mCreditsButton;
 
+    private int mFragmentContainer;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +32,8 @@ public class MainMenuFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.main_menu_fragment, container, false);
+
+        mFragmentContainer = getArguments().getInt(getString(R.string.fragmentContainer));
 
         mStartButton = (Button) v.findViewById(R.id.start_btn);
         mStartButton.setOnClickListener(new View.OnClickListener() {
@@ -53,7 +58,12 @@ public class MainMenuFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 //Switching fragments to display credits
-                ((MainActivity)getActivity()).switchFragment();
+                Fragment newFragment = new CreditsFragment();
+                Bundle bundle = new Bundle();
+                bundle.putInt(getString(R.string.fragmentContainer), mFragmentContainer);
+                newFragment.setArguments(bundle);
+
+                ((MainActivity)getActivity()).switchFragment(mFragmentContainer, newFragment);
                 Toast.makeText(getActivity(), "Switching fragments", Toast.LENGTH_LONG);
             }
         });
