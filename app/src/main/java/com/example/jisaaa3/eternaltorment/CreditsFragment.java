@@ -7,14 +7,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 /**
  * Created by Adrian on 10/24/2017.
  */
 
 public class CreditsFragment extends Fragment{
-    private LinearLayout mCreditsContainer;
+    private TextView mCreditsContainer;
 
     private int mFragmentContainer;
 
@@ -30,7 +33,7 @@ public class CreditsFragment extends Fragment{
 
         mFragmentContainer = getArguments().getInt(getString(R.string.fragmentContainer));
 
-        mCreditsContainer = (LinearLayout) v.findViewById(R.id.credits_container);
+        mCreditsContainer = (TextView) v.findViewById(R.id.credits_container);
         mCreditsContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
