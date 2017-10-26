@@ -3,4 +3,5 @@
     <string name="start_game">START!</string>
     <string name="armory">ARMORY</string>
     <string name="credits">CREDITS</string>
+    <string name="fragmentContainer">fragmentContainer</string>
 </resources>
