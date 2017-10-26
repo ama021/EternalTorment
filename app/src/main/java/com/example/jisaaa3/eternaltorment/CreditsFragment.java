@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * Created by Adrian on 10/25/2017.
+ * Created by Adrian on 10/24/2017.
  */
 
 public class CreditsFragment extends Fragment{
