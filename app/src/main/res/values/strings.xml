@@ -4,4 +4,9 @@
     <string name="armory">ARMORY</string>
     <string name="credits">CREDITS</string>
     <string name="fragmentContainer">fragmentContainer</string>
+
+    <string name="credits_text">
+        Architecture -> Adrian Adams\n
+        Asset Design -> Jared Harden
+    </string>
 </resources>
