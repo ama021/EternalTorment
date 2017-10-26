@@ -15,8 +15,12 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.main_screen_fragment_container);
 
+        Bundle bundle = new Bundle();
+        bundle.putInt(getString(R.string.fragmentContainer), R.id.main_screen_fragment_container);
+
         if (fragment == null) {
             fragment = new MainMenuFragment();
+            fragment.setArguments(bundle);
             fm.beginTransaction()
                     .add(R.id.main_screen_fragment_container, fragment)
                     .commit();
@@ -24,6 +28,17 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    public void switchFragment(int fragmentContainer, Fragment newFragment) {
+        //Pass in origin fragment container and destinatation fragment
+        //Switch fragments
+        FragmentManager fm = getSupportFragmentManager();
+        fm.beginTransaction()
+                .replace(fragmentContainer, newFragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
 
 
 }
