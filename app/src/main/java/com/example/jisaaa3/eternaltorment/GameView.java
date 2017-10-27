@@ -73,12 +73,14 @@ public class GameView extends SurfaceView implements Runnable{
     /*
         Set a listener on UI object DPad
         Then pass this result into the model
+        DPad.setOnTouchListener
      */
 
 
     /*
         Set a listener on the swipe portion of the screen
         Then pass this result into the model
+
      */
 
 
