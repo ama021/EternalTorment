@@ -1,5 +1,6 @@
 package com.example.jisaaa3.eternaltorment;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class ArmoryActivity extends AppCompatActivity {
+public class ArmoryActivity extends Activity {
     private RecyclerView mArmoryRecyclerView;
     private ArmoryItemAdapter mAdapter;
 

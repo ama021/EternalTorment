@@ -2,6 +2,8 @@ package com.example.jisaaa3.eternaltorment;
 
 import android.content.Context;
 
+import java.util.ArrayList;
+
 /**
  * Created by ama02 on 11/25/2017.
  */
@@ -18,7 +20,7 @@ public class Player extends Sprite {
         setLocation(location_x, location_y);
     }
 
-    public void update(long fps) {
-
+    public boolean update(long fps, ArrayList<Sprite> spriteList) {
+        return true;
     }
 }

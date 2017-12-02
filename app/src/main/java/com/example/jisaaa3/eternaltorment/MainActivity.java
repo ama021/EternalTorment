@@ -1,18 +1,20 @@
 package com.example.jisaaa3.eternaltorment;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+import android.app.Activity;
+
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        FragmentManager fm = getSupportFragmentManager();
+        FragmentManager fm = getFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.main_screen_fragment_container);
 
         Bundle bundle = new Bundle();
@@ -32,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     public void switchFragment(int fragmentContainer, Fragment newFragment) {
         //Pass in origin fragment container and destinatation fragment
         //Switch fragments
-        FragmentManager fm = getSupportFragmentManager();
+        FragmentManager fm = getFragmentManager();
         fm.beginTransaction()
                 .replace(fragmentContainer, newFragment)
                 .addToBackStack(null)

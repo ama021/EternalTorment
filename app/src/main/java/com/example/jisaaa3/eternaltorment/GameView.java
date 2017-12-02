@@ -1,7 +1,11 @@
 package com.example.jisaaa3.eternaltorment;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -16,7 +20,7 @@ public class GameView extends SurfaceView implements Runnable{
     Thread mGameThread = null;
 
     //Model Object
-    GameModel model;
+    GameModel gameModel;
 
     //Screen Boundaries
     private int mScreenSize_x;
@@ -35,9 +39,13 @@ public class GameView extends SurfaceView implements Runnable{
     //To help start a new game
     private Context mContext;
 
+    private Long startFrameTime;
+    private Long finishFrameTime;
+    private Long fps;
 
 
-    public GameView(Context context, int screenSize_x, int screenSize_y) {
+
+    public GameView(Context context, int screenSize_x, int screenSize_y, GameModel gameModel) {
         super(context);
         mContext = context;
 
@@ -46,25 +54,47 @@ public class GameView extends SurfaceView implements Runnable{
 
         mScreenSize_x = screenSize_x;
         mScreenSize_y = screenSize_y;
+
+        this.gameModel = gameModel;
+        gameModel.spriteList.add(new Skeleton());
+        gameModel.spriteList.get(0).setLocation(0, screenSize_y / 2);
     }
 
     @Override
     public void run() {
         //Main game loop
         while(mPlaying) {
-            model.update();
+            startFrameTime = System.currentTimeMillis();
+
+            gameModel.spriteList.get(0).setLocation(gameModel.spriteList.get(0).getLocation().x + 1, gameModel.spriteList.get(0).getLocation().y);
+
+            //model.update(fps);
             this.draw();
-            this.control();
+
+
+            finishFrameTime = System.currentTimeMillis() - startFrameTime;
+            if (finishFrameTime >= 1) {
+                fps = 1000 / finishFrameTime;
+            }
+
         }
     }
 
-    private void draw() {
+    public void draw() {
+        if (mSurfaceHolder.getSurface().isValid()) {
+            mCanvas = mSurfaceHolder.lockCanvas();
 
+            mPaint.setColor(Color.argb(255, 255, 255, 255));
+            Resources res = mContext.getResources();
+            Bitmap bm = BitmapFactory.decodeResource(res, R.drawable.skeleton_shield_right);
+
+            mCanvas.drawBitmap(bm, gameModel.spriteList.get(0).getLocation().x, gameModel.spriteList.get(0).getLocation().y, mPaint);
+
+
+            mSurfaceHolder.unlockCanvasAndPost(mCanvas);
+        }
     }
 
-    private void control() {
-
-    }
 
     /*
         Getting User Inputs
@@ -87,6 +117,12 @@ public class GameView extends SurfaceView implements Runnable{
     /*
         Handle cases when our thread is destroyed or interrupted
         We will need to pause the game and handle the thread
+     */
+
+    /*
+        Controller will be implemented similar to the game example. We will have 2 rectangles in the
+        bottom left and right hand corners which will appropiatley size with the controller input.
+        Left rectangle will snag onsingletapup events and right will snag onFling events.
      */
 
     public void pause() {

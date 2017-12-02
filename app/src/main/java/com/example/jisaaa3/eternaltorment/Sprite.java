@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import java.util.ArrayList;
+
 /**
  * Created by ama02 on 11/25/2017.
  */
@@ -17,7 +19,7 @@ public abstract class Sprite {
 
     private String bitmapName;
 
-    public abstract void update(long fps);
+    public abstract boolean update(long fps, ArrayList<Sprite> spriteList);
 
     /*
         Setter and getters for the bitmap
