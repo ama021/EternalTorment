@@ -1,10 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="667dp"
     android:layout_height="match_parent"
-    tools:context="com.example.jisaaa3.eternaltorment.GameActivity">
+    tools:layout_editor_absoluteY="8dp"
+    tools:layout_editor_absoluteX="8dp">
 
-</android.support.constraint.ConstraintLayout>
+    <SurfaceView
+        android:id="@+id/surfaceView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/dungeon_background"/>
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="291dp"
+        android:layout_height="162dp"
+        android:layout_marginBottom="1dp"
+        android:text="Swipe"
+        android:layout_gravity="bottom|right
+"/>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="284dp"
+        android:layout_height="168dp"
+        android:layout_gravity="bottom|left"
+        app:srcCompat="@drawable/direction_pad" />
+
+
+</FrameLayout>
+
