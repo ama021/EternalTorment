@@ -6,13 +6,28 @@ import android.graphics.Point;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Display;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.SurfaceView;
+import android.view.View;
 import android.widget.Button;
 
-public class GameActivity extends Activity {
+public class GameActivity extends Activity implements
+        View.OnClickListener {
 
-    public GameModel mGameModel;
+    private GestureDetector gestureDetector;
+
+    GameModel mGameModel;
+    private GameController mGameController;
+
+    private Button mDpad_left;
+    private Button mDpad_right;
+    private Button mDpad_up;
+    private Button mDpad_down;
+
+    private Button mSwipe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,14 +38,33 @@ public class GameActivity extends Activity {
         Point size = new Point();
         display.getSize(size);
         mGameModel = new GameModel();
-        //mGameModel.spriteList.add(new Skeleton());
-
-
-        //mGameView = new GameView(this, size.x, size.y, mGameModel);
-
+        mGameController = new GameController(mGameModel);
 
         setContentView(R.layout.activity_game);
 
+        mDpad_left = (Button) findViewById(R.id.dpad_left);
+        mDpad_left.setOnClickListener(this);
+
+        mDpad_right = (Button) findViewById(R.id.dpad_right);
+        mDpad_right.setOnClickListener(this);
+
+        mDpad_up = (Button) findViewById(R.id.dpad_up);
+        mDpad_up.setOnClickListener(this);
+
+        mDpad_down = (Button) findViewById(R.id.dpad_down);
+        mDpad_down.setOnClickListener(this);
+
+        this.gestureDetector = new GestureDetector(this, new MyGestureListener());
+
+        mSwipe = (Button) findViewById(R.id.swipe_input);
+        mSwipe.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                gestureDetector.onTouchEvent(motionEvent);
+
+                return false;
+            }
+        });
     }
 
     /*
@@ -50,4 +84,44 @@ public class GameActivity extends Activity {
         super.onResume();
         //mGameView.resume();
     }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.dpad_left:
+                this.mGameController.pressedLeft();
+                break;
+            case R.id.dpad_right:
+                this.mGameController.pressedRight();
+                break;
+            case R.id.dpad_up:
+                this.mGameController.pressedUp();
+                break;
+            case R.id.dpad_down:
+                this.mGameController.pressedDown();
+                break;
+            default:
+                break;
+        }
+    }
+
+    class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
+        private static final String TAG = "Gestures";
+
+        @Override
+        public boolean onDown(MotionEvent event) {
+            Log.d(TAG, "onDown: " + event.toString());
+            return true;
+        }
+
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocity_x, float velocity_y) {
+            Log.d(TAG, "on Fling: " + e1.toString() + e2.toString());
+            Log.d(TAG, "Velocity x: " + velocity_x + " Velocity y: " + velocity_y);
+            return true;
+        }
+    }
+
 }
+
+

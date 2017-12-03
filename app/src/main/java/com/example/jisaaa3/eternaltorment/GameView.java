@@ -65,28 +65,28 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
 
     @Override
     public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
-        boolean retry = true;
+        mGameThread.setRunning(false);
 
-        while(retry) {
-            try {
-                mGameThread.join();
-                retry = false;
-            } catch (InterruptedException e) {
-                Log.d(getClass().getSimpleName(), "Interupted exception", e);
-            }
+        try {
+            mGameThread.join();
+        } catch (InterruptedException e) {
+            Log.e("GameView", "Interrupted Exception: ", e);
         }
     }
 
     @Override
     public void draw(Canvas canvas) {
-        super.draw(canvas);
+        if (canvas != null) {
+            super.draw(canvas);
 
-        mPaint.setColor(Color.argb(255, 65, 25, 255));
+            mPaint.setColor(Color.argb(255, 65, 25, 255));
 
 
-        Resources res = mContext.getResources();
-        //Bitmap bm = BitmapFactory.decodeResource(res, R.drawable.dungeon_background);
-        //canvas.drawBitmap(bm, 0, 0, mPaint);
+            Resources res = mContext.getResources();
+            //Bitmap bm = BitmapFactory.decodeResource(res, R.drawable.dungeon_background);
+            //canvas.drawBitmap(bm, 0, 0, mPaint);
+        }
+
 
     }
 

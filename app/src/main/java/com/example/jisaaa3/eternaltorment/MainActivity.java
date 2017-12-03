@@ -41,6 +41,11 @@ public class MainActivity extends Activity {
                 .commit();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
 
 
 }

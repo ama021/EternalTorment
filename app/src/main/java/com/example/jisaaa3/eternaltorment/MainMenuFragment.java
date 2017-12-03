@@ -73,4 +73,9 @@ public class MainMenuFragment extends Fragment {
 
         return v;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 }

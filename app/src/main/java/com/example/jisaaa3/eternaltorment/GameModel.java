@@ -9,7 +9,8 @@ import java.util.Iterator;
 
 public class GameModel {
 
-    ArrayList<Sprite> spriteList;
+    private ArrayList<Sprite> spriteList;
+    private Player mPlayer;
 
     GameModel() {
         spriteList = new ArrayList<>();
@@ -27,7 +28,5 @@ public class GameModel {
                 iter.remove();
             }
         }
-
-
     }
 }
