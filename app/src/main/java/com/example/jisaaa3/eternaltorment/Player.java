@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Point;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -22,6 +23,9 @@ public class Player extends Sprite {
     private int health;
     private int animationFrame;
 
+    private int screensize_x;
+    private int screensize_y;
+
     /*
         This is used to delay the animation. Once the count reaches 0 it will go to the next animation frame
      */
@@ -32,9 +36,12 @@ public class Player extends Sprite {
     private boolean isHit = false;
     private boolean isAnimating = false;
 
-    Player(Context context, int location_x, int location_y) {
+    Player(Context context, int screensize_x, int scrrensize_y) {
         setType("Player");
         this.mContext = context;
+
+        this.screensize_x = screensize_x;
+        this.screensize_y = scrrensize_y;
 
         /*
             TODO: set bitmap initially to down
@@ -43,7 +50,7 @@ public class Player extends Sprite {
         Resources r = mContext.getResources();
         setCurrentBitmap(BitmapFactory.decodeResource(r, R.drawable.down_direction_knight));
         this.health = 3;
-        setLocation(location_x, location_y);
+        setLocation(this.screensize_x - this.currentBitmap.getWidth() / 2, this.screensize_y - this.currentBitmap.getHeight() / 2);
         setSpriteDirection("down");
     }
 
@@ -96,7 +103,8 @@ public class Player extends Sprite {
                 //Set animation for UtD and do collision detection
                 Log.d(TAG, "Swipe Up to Down");
             } else {
-                //Set animation for DtU and do collision detection
+                //Set an
+                // imation for DtU and do collision detection
                 Log.d(TAG, "Swipe Down to Up");
             }
         }
@@ -136,6 +144,7 @@ public class Player extends Sprite {
 
     private void setCurrentBitmap(Bitmap bm) {
         this.currentBitmap = bm;
+        this.setLocation(screensize_x - this.currentBitmap.getWidth() / 2, screensize_y - this.currentBitmap.getHeight() / 2);
 
     }
 

@@ -19,7 +19,7 @@ public class GameModel {
 
     GameModel(Context context, int screensize_x, int screensize_y) {
         spriteList = new ArrayList<>();
-        mPlayer = new Player(context, screensize_x, screensize_y);
+        mPlayer = new Player(context, screensize_x/2, screensize_y/2);
         spriteList.add(mPlayer);
     }
 

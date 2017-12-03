@@ -96,8 +96,11 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
         if (canvas != null) {
             super.draw(canvas);
 
+            Resources res = mContext.getResources();
+            Bitmap background = BitmapFactory.decodeResource(res, R.drawable.dungeon_background);
             mPaint.setColor(Color.argb(255, 65, 25, 255));
             canvas.drawARGB(255, 255, 65, 22);
+            canvas.drawBitmap(background, -84, 0, mPaint);
 
 
             List<Sprite> gameObjects = mGameModel.getSpriteList();
@@ -106,40 +109,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
 
             Player p = (Player) gameObjects.get(0);
             Bitmap bm = p.bitmapToDraw();
-            canvas.drawBitmap(bm, 0, 0, mPaint);
+            canvas.drawBitmap(bm, p.getLocation().x, p.getLocation().y, mPaint);
 
-
-
-
-            Resources res = mContext.getResources();
-            //Bitmap bm = BitmapFactory.decodeResource(res, R.drawable.dungeon_background);
-            //canvas.drawBitmap(bm, 0, 0, mPaint);
-        }
-
-
-    }
-
-
-/*
-    @Override
-    public void run() {
-        //Main game loop
-        while(mPlaying) {
-            startFrameTime = System.currentTimeMillis();
-
-            gameModel.spriteList.get(0).setLocation(gameModel.spriteList.get(0).getLocation().x + 1, gameModel.spriteList.get(0).getLocation().y);
-
-            //model.update(fps);
-            this.draw();
-
-
-            finishFrameTime = System.currentTimeMillis() - startFrameTime;
-            if (finishFrameTime >= 1) {
-                fps = 1000 / finishFrameTime;
-            }
-
+            canvas.drawBitmap(BitmapFactory.decodeResource(res, R.drawable.skeleton_down_shield_right), 0, 0, mPaint);
         }
     }
-    */
-
 }

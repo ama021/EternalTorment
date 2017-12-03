@@ -32,7 +32,7 @@ public class GameThread extends Thread{
                 //Somehow tell the surfaceView to destroy itself and go back to main menu
                 break;
             }
-            */
+*/
 
             if (mSurfaceHolder.getSurface().isValid()) {
                 canvas = mSurfaceHolder.lockCanvas();
