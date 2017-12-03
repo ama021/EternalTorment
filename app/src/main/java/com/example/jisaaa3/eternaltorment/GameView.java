@@ -14,6 +14,8 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import java.util.List;
+
 /**
  * Created by jisaaa3 on 10/27/2017.
  */
@@ -78,6 +80,11 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
     public void draw(Canvas canvas) {
         if (canvas != null) {
             super.draw(canvas);
+
+
+            List<Sprite> gameObjects = mGameModel.getSpriteList();
+
+            //Iterate over the objects and draw them.
 
             mPaint.setColor(Color.argb(255, 65, 25, 255));
 

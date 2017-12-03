@@ -2,6 +2,7 @@ package com.example.jisaaa3.eternaltorment;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by jisaaa3 on 10/27/2017.
@@ -9,7 +10,7 @@ import java.util.Iterator;
 
 public class GameModel {
 
-    private ArrayList<Sprite> spriteList;
+    private List<Sprite> spriteList;
     private Player mPlayer;
 
     private boolean hasOhShitBeenUsed;
@@ -20,7 +21,8 @@ public class GameModel {
     }
 
 
-    public void update(Long fps) {
+    //returns true if the player is dead
+    public boolean update(Long fps) {
         Iterator<Sprite> iter = spriteList.iterator();
 
         while (iter.hasNext()) {
@@ -29,8 +31,15 @@ public class GameModel {
             if (sprite.update(fps, spriteList)) {
                 //Collision and game is not over, therefore we need to remove the skeleton
                 iter.remove();
+            } else if (sprite instanceof Player) {
+                Player p = (Player) sprite;
+                if (!p.isAlive()) {
+                    return true;
+                }
             }
         }
+
+        return false;
     }
 
     public void playerDirectionChange(String event) {
@@ -70,5 +79,9 @@ public class GameModel {
 
     public void playerAttack(float velocity_x, float velocity_y) {
         mPlayer.attack(velocity_x, velocity_y);
+    }
+
+    public List<Sprite> getSpriteList() {
+        return this.spriteList;
     }
 }

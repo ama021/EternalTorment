@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by ama02 on 11/25/2017.
@@ -19,7 +20,7 @@ public abstract class Sprite {
 
     private boolean isAlive;
 
-    public abstract boolean update(long fps, ArrayList<Sprite> spriteList);
+    public abstract boolean update(long fps, List<Sprite> spriteList);
 
     /*
         Setter and getters for the bitmap
@@ -66,6 +67,14 @@ public abstract class Sprite {
     }
 
 
+    public boolean isAlive() {
+        return isAlive;
+    }
+
+    public void setAlive(boolean alive) {
+        isAlive = alive;
+    }
+
     public boolean collision_detection(Sprite player, Sprite Skeleton) {
         //Need to detect collision here. However, due to the spear need to handle that somehow.
 
@@ -76,5 +85,7 @@ public abstract class Sprite {
 
             Skeleton will check if they have hit the player within their corrected boundaries
          */
+
+        return false;
     }
 }
