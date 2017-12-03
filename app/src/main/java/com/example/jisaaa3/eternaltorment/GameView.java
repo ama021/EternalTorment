@@ -7,6 +7,9 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.support.annotation.AttrRes;
+import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -15,20 +18,14 @@ import android.view.SurfaceView;
  * Created by jisaaa3 on 10/27/2017.
  */
 
-public class GameView extends SurfaceView implements Runnable{
-    volatile boolean mPlaying;
-    Thread mGameThread = null;
+public class GameView extends SurfaceView implements SurfaceHolder.Callback{
+    private GameThread mGameThread = null;
 
     //Model Object
-    GameModel gameModel;
-
-    //Screen Boundaries
-    private int mScreenSize_x;
-    private int mScreenSize_y;
+    GameModel mGameModel;
 
     //For Drawing
     private Paint mPaint;
-    private Canvas mCanvas;
     private SurfaceHolder mSurfaceHolder;
 
     //For the HUD
@@ -39,27 +36,62 @@ public class GameView extends SurfaceView implements Runnable{
     //To help start a new game
     private Context mContext;
 
-    private Long startFrameTime;
-    private Long finishFrameTime;
-    private Long fps;
-
-
-
-    public GameView(Context context, int screenSize_x, int screenSize_y, GameModel gameModel) {
-        super(context);
+    public GameView(Context context, AttributeSet attrs) {
+        super(context, attrs);
         mContext = context;
-
+        GameActivity a = (GameActivity) context;
+        this.mGameModel = a.mGameModel;
         mSurfaceHolder = getHolder();
+        mSurfaceHolder.addCallback(this);
         mPaint = new Paint();
-
-        mScreenSize_x = screenSize_x;
-        mScreenSize_y = screenSize_y;
-
-        this.gameModel = gameModel;
-        gameModel.spriteList.add(new Skeleton());
-        gameModel.spriteList.get(0).setLocation(0, screenSize_y / 2);
     }
 
+
+    @Override
+    public void surfaceCreated(SurfaceHolder surfaceHolder) {
+
+    }
+
+    @Override
+    public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
+
+        if (mGameThread == null) {
+            mGameThread = new GameThread(this, this.mGameModel);
+            mGameThread.setRunning(true);
+            mGameThread.start();
+        }
+
+    }
+
+    @Override
+    public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
+        boolean retry = true;
+
+        while(retry) {
+            try {
+                mGameThread.join();
+                retry = false;
+            } catch (InterruptedException e) {
+                Log.d(getClass().getSimpleName(), "Interupted exception", e);
+            }
+        }
+    }
+
+    @Override
+    public void draw(Canvas canvas) {
+        super.draw(canvas);
+
+        mPaint.setColor(Color.argb(255, 65, 25, 255));
+
+
+        Resources res = mContext.getResources();
+        //Bitmap bm = BitmapFactory.decodeResource(res, R.drawable.dungeon_background);
+        //canvas.drawBitmap(bm, 0, 0, mPaint);
+
+    }
+
+
+/*
     @Override
     public void run() {
         //Main game loop
@@ -79,67 +111,6 @@ public class GameView extends SurfaceView implements Runnable{
 
         }
     }
-
-    public void draw() {
-        if (mSurfaceHolder.getSurface().isValid()) {
-            mCanvas = mSurfaceHolder.lockCanvas();
-
-            mPaint.setColor(Color.argb(255, 255, 255, 255));
-            Resources res = mContext.getResources();
-            Bitmap bm = BitmapFactory.decodeResource(res, R.drawable.skeleton_shield_right);
-
-            mCanvas.drawBitmap(bm, gameModel.spriteList.get(0).getLocation().x, gameModel.spriteList.get(0).getLocation().y, mPaint);
-
-
-            mSurfaceHolder.unlockCanvasAndPost(mCanvas);
-        }
-    }
-
-
-    /*
-        Getting User Inputs
-     */
-
-    /*
-        Set a listener on UI object DPad
-        Then pass this result into the model
-        DPad.setOnTouchListener
-     */
-
-
-    /*
-        Set a listener on the swipe portion of the screen
-        Then pass this result into the model
-
-     */
-
-
-    /*
-        Handle cases when our thread is destroyed or interrupted
-        We will need to pause the game and handle the thread
-     */
-
-    /*
-        Controller will be implemented similar to the game example. We will have 2 rectangles in the
-        bottom left and right hand corners which will appropiatley size with the controller input.
-        Left rectangle will snag onsingletapup events and right will snag onFling events.
-     */
-
-    public void pause() {
-        mPlaying = false;
-
-        try {
-            mGameThread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void resume() {
-        mPlaying = true;
-        mGameThread = new Thread(this);
-        mGameThread.start();
-    }
-
+    */
 
 }

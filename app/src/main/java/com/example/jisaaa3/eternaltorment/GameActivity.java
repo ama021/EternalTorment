@@ -7,14 +7,12 @@ import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Display;
+import android.view.SurfaceView;
+import android.widget.Button;
 
 public class GameActivity extends Activity {
 
-
-    private Canvas mGameCanvas;
-
-    private GameView mGameView;
-    private GameModel mGameModel;
+    public GameModel mGameModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,22 +23,14 @@ public class GameActivity extends Activity {
         Point size = new Point();
         display.getSize(size);
         mGameModel = new GameModel();
-        mGameView = new GameView(this, size.x, size.y, mGameModel);
+        //mGameModel.spriteList.add(new Skeleton());
 
-        /*
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            //    mGameView.setBackground(getResources().getDrawable(R.drawable.dungeon_background));
-        }
-        */
 
-        setContentView(mGameView);
+        //mGameView = new GameView(this, size.x, size.y, mGameModel);
 
-        mGameView.draw();
 
-        /*
-            Inflate view with xml sheet. Canvas = mGameView
-            then put buttons on top then add ongestureliseners
-         */
+        setContentView(R.layout.activity_game);
+
     }
 
     /*
@@ -49,7 +39,7 @@ public class GameActivity extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
-        mGameView.pause();
+        //mGameView.pause();
     }
 
     /*
@@ -58,6 +48,6 @@ public class GameActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        mGameView.resume();
+        //mGameView.resume();
     }
 }
