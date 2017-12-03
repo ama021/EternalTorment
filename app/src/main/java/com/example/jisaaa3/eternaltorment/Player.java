@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
+import android.graphics.Rect;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -26,6 +27,8 @@ public class Player extends Sprite {
     private int screensize_x;
     private int screensize_y;
 
+    private Rect playerBoundary;
+
     /*
         This is used to delay the animation. Once the count reaches 0 it will go to the next animation frame
      */
@@ -39,19 +42,16 @@ public class Player extends Sprite {
     Player(Context context, int screensize_x, int scrrensize_y) {
         setType("Player");
         this.mContext = context;
-
+        this.health = 3;
         this.screensize_x = screensize_x;
         this.screensize_y = scrrensize_y;
 
-        /*
-            TODO: set bitmap initially to down
-         */
-
         Resources r = mContext.getResources();
         setCurrentBitmap(BitmapFactory.decodeResource(r, R.drawable.down_direction_knight));
-        this.health = 3;
         setLocation(this.screensize_x - this.currentBitmap.getWidth() / 2, this.screensize_y - this.currentBitmap.getHeight() / 2);
         setSpriteDirection("down");
+
+        setPlayerBoundary();
     }
 
     public boolean update(long fps, List<Sprite> spriteList) {
@@ -70,7 +70,7 @@ public class Player extends Sprite {
             doAnimation();
         }
 
-
+        setPlayerBoundary();
 
         return false;
     }
@@ -157,5 +157,17 @@ public class Player extends Sprite {
 
     private void die() {
         //setCurrentBitmap(bm.dead);
+    }
+
+    private void setPlayerBoundary() {
+        playerBoundary.set(
+                (int) getLocation().x,
+                (int) getLocation().y,
+                (int) getLocation().x + currentBitmap.getWidth(),
+                (int) getLocation().y + currentBitmap.getHeight()
+        );
+
+        Log.d(TAG, "Player Boundary" + playerBoundary);
+        Log.d
     }
 }

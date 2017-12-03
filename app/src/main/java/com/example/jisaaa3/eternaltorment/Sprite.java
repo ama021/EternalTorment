@@ -3,6 +3,7 @@ package com.example.jisaaa3.eternaltorment;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Rect;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,8 @@ import java.util.List;
 public abstract class Sprite {
     private Vector2Point location;
 
+    private Rect spriteHitBox;
+
     private String type;
     private String bitmapName;
     private String spriteDirection;
@@ -21,11 +24,6 @@ public abstract class Sprite {
     private boolean isAlive;
 
     public abstract boolean update(long fps, List<Sprite> spriteList);
-
-    /*
-        Setter and getters for the bitmap
-
-     */
 
     public String getBitmapName() {
         return this.bitmapName;
@@ -75,7 +73,13 @@ public abstract class Sprite {
         isAlive = alive;
     }
 
-    public boolean collision_detection(Sprite player, Sprite Skeleton) {
+    public boolean collision_detection(Sprite a, Sprite b) {
+
+        if (a instanceof Player) {
+            //Check for player attack collision
+        } else if (b instanceof Skeleton) {
+            //Check for skeleton colliding with player
+        }
         //Need to detect collision here. However, due to the spear need to handle that somehow.
 
         /*

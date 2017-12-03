@@ -28,6 +28,7 @@ public class GameModel {
     public boolean update(Long fps) {
         Iterator<Sprite> iter = spriteList.iterator();
 
+        /*
         while (iter.hasNext()) {
             Sprite sprite = iter.next();
 
@@ -41,6 +42,7 @@ public class GameModel {
                 }
             }
         }
+        */
 
         return false;
     }
