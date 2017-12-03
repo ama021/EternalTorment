@@ -12,6 +12,8 @@ public class GameModel {
     private ArrayList<Sprite> spriteList;
     private Player mPlayer;
 
+    private boolean hasOhShitBeenUsed;
+
     GameModel(int screensize_x, int screensize_y) {
         spriteList = new ArrayList<>();
         mPlayer = new Player(screensize_x, screensize_y);
@@ -47,6 +49,22 @@ public class GameModel {
                 break;
             default:
                 break;
+        }
+    }
+
+    public void ohShitButton() {
+        if (!hasOhShitBeenUsed) {
+            Iterator<Sprite> iter = spriteList.iterator();
+
+            while (iter.hasNext()) {
+                if (iter.next() instanceof Skeleton) {
+                    Skeleton s = (Skeleton) iter.next();
+                    s.die();
+                    iter.remove();
+                }
+            }
+
+            hasOhShitBeenUsed = true;
         }
     }
 

@@ -12,6 +12,8 @@ import java.util.ArrayList;
 public class Player extends Sprite {
     private static final String TAG = "Player";
 
+    private int health;
+
     Player(int location_x, int location_y) {
         setType("Player");
 
@@ -39,6 +41,7 @@ public class Player extends Sprite {
                 //Means we are swiping LtR
                 if (velocity_x > 0) {
                     //Set animation for LtR and do collision detection
+                    check_collision();
                     Log.d(TAG, "Swipe Left to right");
                 } else {
                     //Set animation for RtL and do collision detection
@@ -54,6 +57,12 @@ public class Player extends Sprite {
                 //Set animation for DtU and do collision detection
                 Log.d(TAG, "Swipe Down to Up");
             }
+        }
+    }
+
+    private void check_collision() {
+        if (isAlive) {
+
         }
     }
 }

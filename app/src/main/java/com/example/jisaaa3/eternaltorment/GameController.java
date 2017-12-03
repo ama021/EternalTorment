@@ -29,6 +29,10 @@ public class GameController {
         mGameModel.playerDirectionChange("look_down");
     }
 
+    public void pressedOhShitButton() {
+        mGameModel.ohShitButton();
+    }
+
     public void playerSwipe(float velocity_x, float velocity_y) {
         mGameModel.playerAttack(velocity_x, velocity_y);
     }

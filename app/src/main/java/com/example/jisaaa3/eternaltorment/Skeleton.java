@@ -8,8 +8,13 @@ import java.util.ArrayList;
 
 public class Skeleton extends Sprite {
 
+    private String weak_side;
 
     public boolean update(long fps, ArrayList<Sprite> spriteList) {
         return true;
+    }
+
+    public void die() {
+        //play dying animation
     }
 }

@@ -17,6 +17,8 @@ public abstract class Sprite {
     private String bitmapName;
     private String spriteDirection;
 
+    private boolean isAlive;
+
     public abstract boolean update(long fps, ArrayList<Sprite> spriteList);
 
     /*
@@ -61,5 +63,18 @@ public abstract class Sprite {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+
+    public boolean collision_detection(Sprite player, Sprite Skeleton) {
+        //Need to detect collision here. However, due to the spear need to handle that somehow.
+
+        /*
+            member variables in player that define its collision?
+
+            Player will check if the attack hit the skeleton
+
+            Skeleton will check if they have hit the player within their corrected boundaries
+         */
     }
 }
