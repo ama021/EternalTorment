@@ -37,7 +37,7 @@ public class GameActivity extends Activity implements
 
         Point size = new Point();
         display.getSize(size);
-        mGameModel = new GameModel();
+        mGameModel = new GameModel(size.x, size.y);
         mGameController = new GameController(mGameModel);
 
         setContentView(R.layout.activity_game);
@@ -118,6 +118,7 @@ public class GameActivity extends Activity implements
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocity_x, float velocity_y) {
             Log.d(TAG, "on Fling: " + e1.toString() + e2.toString());
             Log.d(TAG, "Velocity x: " + velocity_x + " Velocity y: " + velocity_y);
+            mGameController.playerSwipe(velocity_x, velocity_y);
             return true;
         }
     }

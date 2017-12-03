@@ -24,7 +24,7 @@ public class GameThread extends Thread{
     public void run() {
         Canvas canvas = null;
         while (isRunning) {
-            //mGameModel.update((long) -1);
+            mGameModel.update((long) -1);
 
             if (mSurfaceHolder.getSurface().isValid()) {
                 canvas = mSurfaceHolder.lockCanvas();

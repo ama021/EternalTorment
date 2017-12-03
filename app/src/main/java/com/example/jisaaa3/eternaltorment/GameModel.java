@@ -12,8 +12,9 @@ public class GameModel {
     private ArrayList<Sprite> spriteList;
     private Player mPlayer;
 
-    GameModel() {
+    GameModel(int screensize_x, int screensize_y) {
         spriteList = new ArrayList<>();
+        mPlayer = new Player(screensize_x, screensize_y);
     }
 
 
@@ -28,5 +29,28 @@ public class GameModel {
                 iter.remove();
             }
         }
+    }
+
+    public void playerDirectionChange(String event) {
+        switch (event) {
+            case "look_left":
+                mPlayer.changeDirection("left");
+                break;
+            case "look_right":
+                mPlayer.changeDirection("right");
+                break;
+            case "look up":
+                mPlayer.changeDirection("up");
+                break;
+            case "look down":
+                mPlayer.changeDirection("down");
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void playerAttack(float velocity_x, float velocity_y) {
+        mPlayer.attack(velocity_x, velocity_y);
     }
 }

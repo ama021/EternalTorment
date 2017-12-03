@@ -14,22 +14,22 @@ public class GameController {
     }
 
     public void pressedLeft() {
-
+        mGameModel.playerDirectionChange("look_left");
     }
 
     public void pressedRight() {
-
+        mGameModel.playerDirectionChange("look_right");
     }
 
     public void pressedUp() {
-
+        mGameModel.playerDirectionChange("look_up");
     }
 
     public void pressedDown() {
-
+        mGameModel.playerDirectionChange("look_down");
     }
 
     public void playerSwipe(float velocity_x, float velocity_y) {
-
+        mGameModel.playerAttack(velocity_x, velocity_y);
     }
 }

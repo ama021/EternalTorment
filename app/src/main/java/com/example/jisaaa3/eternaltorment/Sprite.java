@@ -13,11 +13,9 @@ import java.util.ArrayList;
 public abstract class Sprite {
     private Vector2Point location;
 
-    private int animationFrameCount = 1;
-
     private String type;
-
     private String bitmapName;
+    private String spriteDirection;
 
     public abstract boolean update(long fps, ArrayList<Sprite> spriteList);
 
@@ -47,6 +45,14 @@ public abstract class Sprite {
         this.location = new Vector2Point();
         this.location.x = x;
         this.location.y = y;
+    }
+
+    public String getSpriteDirection() {
+        return spriteDirection;
+    }
+
+    public void setSpriteDirection(String spriteDirection) {
+        this.spriteDirection = spriteDirection;
     }
 
     public String getType() {
