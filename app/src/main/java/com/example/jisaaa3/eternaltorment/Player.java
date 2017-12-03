@@ -1,7 +1,9 @@
 package com.example.jisaaa3.eternaltorment;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -15,20 +17,31 @@ import java.util.List;
 public class Player extends Sprite {
     private static final String TAG = "Player";
 
+    private Context mContext;
+
     private int health;
     private int animationFrame;
+
+    /*
+        This is used to delay the animation. Once the count reaches 0 it will go to the next animation frame
+     */
+    private int animationFrameTime;
 
     private Bitmap currentBitmap;
 
     private boolean isHit = false;
     private boolean isAnimating = false;
 
-    Player(int location_x, int location_y) {
+    Player(Context context, int location_x, int location_y) {
         setType("Player");
+        this.mContext = context;
 
         /*
             TODO: set bitmap initially to down
          */
+
+        Resources r = mContext.getResources();
+        setCurrentBitmap(BitmapFactory.decodeResource(r, R.drawable.down_direction_knight));
         this.health = 3;
         setLocation(location_x, location_y);
         setSpriteDirection("down");
@@ -50,11 +63,15 @@ public class Player extends Sprite {
             doAnimation();
         }
 
+
+
         return false;
     }
 
     public void changeDirection(String direction) {
         setSpriteDirection(direction);
+        setBitmapDirection(direction);
+        Log.d(TAG, "Player direction: " + direction);
     }
 
     public void attack(float velocity_x, float velocity_y) {
@@ -95,6 +112,25 @@ public class Player extends Sprite {
 
         if (animationFrame == 1) {
             isAnimating = false;
+        }
+    }
+
+    private void setBitmapDirection(String direction) {
+        switch (direction) {
+            case "left":
+                setCurrentBitmap(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.left_direction_knight));
+                break;
+            case "right":
+                setCurrentBitmap(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.right_direction_knight));
+                break;
+            case "up":
+                setCurrentBitmap(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.up_direction_knight));
+                break;
+            case "down":
+                setCurrentBitmap(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.down_direction_knight));
+                break;
+            default:
+                break;
         }
     }
 

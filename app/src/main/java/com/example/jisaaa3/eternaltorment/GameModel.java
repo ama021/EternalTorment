@@ -1,5 +1,7 @@
 package com.example.jisaaa3.eternaltorment;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -15,9 +17,10 @@ public class GameModel {
 
     private boolean hasOhShitBeenUsed;
 
-    GameModel(int screensize_x, int screensize_y) {
+    GameModel(Context context, int screensize_x, int screensize_y) {
         spriteList = new ArrayList<>();
-        mPlayer = new Player(screensize_x, screensize_y);
+        mPlayer = new Player(context, screensize_x, screensize_y);
+        spriteList.add(mPlayer);
     }
 
 
@@ -50,10 +53,10 @@ public class GameModel {
             case "look_right":
                 mPlayer.changeDirection("right");
                 break;
-            case "look up":
+            case "look_up":
                 mPlayer.changeDirection("up");
                 break;
-            case "look down":
+            case "look_down":
                 mPlayer.changeDirection("down");
                 break;
             default:
@@ -85,3 +88,16 @@ public class GameModel {
         return this.spriteList;
     }
 }
+
+/*
+    TODO: Need to complete collision checking and UI for player
+    TODO: Implement oh shit button
+    TODO: Implement animations and bitmap
+    TODO: Implement drawing of game objects
+    TODO: Implement randomization of skeletons and skeleton game logic
+    TODO: Finish player game logic
+    TODO: Wrap up when game is over and ensure game goes back to main menu
+    TODO: Implement some type of score, number of skeletons killed? Keep high score!
+
+    TODO: Implement armory if have time, focus on game first
+ */

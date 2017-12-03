@@ -37,7 +37,7 @@ public class GameActivity extends Activity implements
 
         Point size = new Point();
         display.getSize(size);
-        mGameModel = new GameModel(size.x, size.y);
+        mGameModel = new GameModel(this, size.x, size.y);
         mGameController = new GameController(mGameModel);
 
         setContentView(R.layout.activity_game);
@@ -89,15 +89,19 @@ public class GameActivity extends Activity implements
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.dpad_left:
+                Log.d("UserInput", "Pressed Left");
                 this.mGameController.pressedLeft();
                 break;
             case R.id.dpad_right:
+                Log.d("UserInput", "Pressed Right");
                 this.mGameController.pressedRight();
                 break;
             case R.id.dpad_up:
+                Log.d("UserInput", "Pressed Up");
                 this.mGameController.pressedUp();
                 break;
             case R.id.dpad_down:
+                Log.d("UserInput", "Pressed Down");
                 this.mGameController.pressedDown();
                 break;
             default:

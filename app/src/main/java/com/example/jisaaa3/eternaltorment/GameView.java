@@ -1,6 +1,8 @@
 package com.example.jisaaa3.eternaltorment;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -40,12 +42,25 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
 
     public GameView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mContext = context;
-        GameActivity a = (GameActivity) context;
-        this.mGameModel = a.mGameModel;
+        mContext = this.getContext();
+        Activity a = scanForActivity(mContext);
+        GameActivity gameActivty = (GameActivity) a;
+        mGameModel = gameActivty.mGameModel;
         mSurfaceHolder = getHolder();
         mSurfaceHolder.addCallback(this);
         mPaint = new Paint();
+    }
+
+    private static Activity scanForActivity(Context context) {
+        if (context == null) {
+            return null;
+        } else if (context instanceof Activity) {
+            return (Activity) context;
+        } else if (context instanceof ContextWrapper) {
+            return scanForActivity(((ContextWrapper)context).getBaseContext());
+        }
+
+        return null;
     }
 
 
@@ -81,12 +96,19 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
         if (canvas != null) {
             super.draw(canvas);
 
+            mPaint.setColor(Color.argb(255, 65, 25, 255));
+            canvas.drawARGB(255, 255, 65, 22);
+
 
             List<Sprite> gameObjects = mGameModel.getSpriteList();
 
             //Iterate over the objects and draw them.
 
-            mPaint.setColor(Color.argb(255, 65, 25, 255));
+            Player p = (Player) gameObjects.get(0);
+            Bitmap bm = p.bitmapToDraw();
+            canvas.drawBitmap(bm, 0, 0, mPaint);
+
+
 
 
             Resources res = mContext.getResources();
