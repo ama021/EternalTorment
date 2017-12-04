@@ -113,14 +113,14 @@ public class Skeleton extends Sprite {
             if(m == 0){
                 shieldSide = 0;
                 setCurrentBitmap(BitmapFactory.decodeResource(r, R.drawable.skeleton_up_shield_left));
-            }else{
+            }
+            else if (m == 1){
                 shieldSide = 1;
                 setCurrentBitmap(BitmapFactory.decodeResource(r, R.drawable.skeleton_up_shield_right));
             }
 
             skeletonCoridore = 0;
-            this.getLocation().x = screensize_x;
-            this.getLocation().y = 0 - currentBitmap.getHeight();
+            this.setLocation((float) screensize_x - currentBitmap.getWidth() / 2, (float) 0 - currentBitmap.getHeight());
         }
 
         // Skeleton Bottom
@@ -129,30 +129,29 @@ public class Skeleton extends Sprite {
             if(m == 0){
                 shieldSide = 0;
                 setCurrentBitmap(BitmapFactory.decodeResource(r, R.drawable.skeleton_down_shield_left));
-            }else{
+            }
+            else if(m == 1){
                 shieldSide = 1;
                 setCurrentBitmap(BitmapFactory.decodeResource(r, R.drawable.skeleton_up_shield_right));
             }
 
             skeletonCoridore = 1;
-            this.getLocation().x = screensize_x;
-            this.getLocation().y = screensize_y * 2;
+            this.setLocation((float) screensize_x - currentBitmap.getWidth() / 2, (float) screensize_y * 2);
         }
-
         // Skeleton Left
         else if(n == 2){
             // Shield side
             if(m == 0){
                 shieldSide = 0;
                 setCurrentBitmap(BitmapFactory.decodeResource(r, R.drawable.skeleton_left_shield_left));
-            }else{
+            }
+            else if(m == 1){
                 shieldSide = 1;
                 setCurrentBitmap(BitmapFactory.decodeResource(r, R.drawable.skeleton_left_shield_right));
             }
 
             skeletonCoridore = 2;
-            this.getLocation().x = 0 - currentBitmap.getHeight();
-            this.getLocation().y = screensize_y;
+            this.setLocation((float) 0 - currentBitmap.getWidth(), (float) screensize_y - currentBitmap.getHeight() / 2);
         }
 
         // Skeleton Right
@@ -161,14 +160,14 @@ public class Skeleton extends Sprite {
             if(m == 0){
                 shieldSide = 0;
                 setCurrentBitmap(BitmapFactory.decodeResource(r, R.drawable.skeleton_right_shield_left));
-            }else{
+            }
+            else if(m == 1){
                 shieldSide = 1;
                 setCurrentBitmap(BitmapFactory.decodeResource(r, R.drawable.skeleton_right_shield_right));
             }
 
             skeletonCoridore = 3;
-            this.getLocation().x = screensize_x * 2;
-            this.getLocation().y = screensize_y;
+            this.setLocation((float) screensize_x * 2, (float) screensize_y - currentBitmap.getHeight() / 2);
         }
     }
 }

@@ -5,22 +5,35 @@ import android.content.Context;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by jisaaa3 on 10/27/2017.
  */
 
 public class GameModel {
+    Random random;
+
+    private Context mContext;
 
     private List<Sprite> spriteList;
     private Player mPlayer;
 
+    private int mScreensize_x;
+    private int mScreensize_y;
+
+    private boolean addSkeleton;
     private boolean hasOhShitBeenUsed;
 
     GameModel(Context context, int screensize_x, int screensize_y, int selectedArmor) {
+        this.mContext = context;
+        this.mScreensize_x = screensize_x;
+        this.mScreensize_y = screensize_y;
         spriteList = new ArrayList<>();
         mPlayer = new Player(context, screensize_x/2, screensize_y/2, selectedArmor);
         spriteList.add(mPlayer);
+        spriteList.add(new Skeleton(context, screensize_x / 2, screensize_y / 2));
+        String test = "testing";
     }
 
 
@@ -29,6 +42,13 @@ public class GameModel {
 
 
         Iterator<Sprite> iter = spriteList.iterator();
+        random = new Random();
+
+        int n = random.nextInt(99);
+        n -= 4;
+        if(n <= 0){
+            addSkeleton = true;
+        }
 
         while (iter.hasNext()) {
             Sprite sprite = iter.next();
@@ -43,6 +63,12 @@ public class GameModel {
                 }
             }
         }
+
+        if (addSkeleton) {
+            spriteList.add(new Skeleton(this.mContext, this.mScreensize_x, this.mScreensize_y));
+            addSkeleton = false;
+        }
+
         return false;
     }
 
