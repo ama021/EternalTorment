@@ -9,10 +9,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class ArmoryActivity extends Activity {
     TextView t;
+    Button b;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +26,10 @@ public class ArmoryActivity extends Activity {
         t = (TextView) findViewById(R.id.armoryText);
         Typeface myCustomFont = Typeface.createFromAsset(getAssets(),"fonts/Blade 2.ttf");
         t.setTypeface(myCustomFont);
+
+        b = (Button) findViewById(R.id.setArmor);
+        Typeface myCustomFont2 = Typeface.createFromAsset(getAssets(),"fonts/Blade 2.ttf");
+        b.setTypeface(myCustomFont);
     }
 
     private void updateUI() {

@@ -3,6 +3,7 @@ package com.example.jisaaa3.eternaltorment;
 
 import android.app.Fragment;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -47,6 +49,9 @@ public class MainMenuFragment extends Fragment {
             }
         });
 
+        Typeface myCustomFont = Typeface.createFromAsset(getActivity().getBaseContext().getAssets(),"fonts/Blade 2.ttf");
+        mStartButton.setTypeface(myCustomFont);
+
         mArmoryButton = (Button) v.findViewById(R.id.armory_btn);
         mArmoryButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +61,9 @@ public class MainMenuFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        Typeface myCustomFont2 = Typeface.createFromAsset(getActivity().getBaseContext().getAssets(),"fonts/Blade 2.ttf");
+        mArmoryButton.setTypeface(myCustomFont2);
 
         mCreditsButton = (Button) v.findViewById(R.id.credits_btn);
         mCreditsButton.setOnClickListener(new View.OnClickListener() {
@@ -70,6 +78,9 @@ public class MainMenuFragment extends Fragment {
                 ((MainActivity)getActivity()).switchFragment(mFragmentContainer, newFragment);
             }
         });
+
+        Typeface myCustomFont3 = Typeface.createFromAsset(getActivity().getBaseContext().getAssets(),"fonts/Blade 2.ttf");
+        mCreditsButton.setTypeface(myCustomFont3);
 
         return v;
     }
