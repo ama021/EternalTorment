@@ -21,6 +21,8 @@ public class GameModel {
         spriteList = new ArrayList<>();
         mPlayer = new Player(context, screensize_x/2, screensize_y/2);
         spriteList.add(mPlayer);
+        spriteList.add(new Skeleton(context, screensize_x / 2, screensize_y / 2));
+        String test = "testing";
     }
 
 
@@ -28,7 +30,8 @@ public class GameModel {
     public boolean update(Long fps) {
         Iterator<Sprite> iter = spriteList.iterator();
 
-        /*
+
+
         while (iter.hasNext()) {
             Sprite sprite = iter.next();
 
@@ -42,7 +45,7 @@ public class GameModel {
                 }
             }
         }
-        */
+
 
         return false;
     }

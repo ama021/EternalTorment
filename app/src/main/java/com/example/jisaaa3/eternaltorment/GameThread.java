@@ -26,7 +26,8 @@ public class GameThread extends Thread{
         Canvas canvas = null;
         while (isRunning) {
 
-            if (isGameOver = mGameModel.update((long) -1)) {
+            isGameOver = mGameModel.update((long) -1);
+            if (isGameOver) {
                 this.isRunning = false;
 
                 //Somehow tell the surfaceView to destroy itself and go back to main menu
