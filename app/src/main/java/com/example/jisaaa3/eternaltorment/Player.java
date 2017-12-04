@@ -68,9 +68,9 @@ public class Player extends Sprite {
 
         if (isAnimating) {
             doAnimation();
+        } else {
+            setPlayerBoundary();
         }
-
-        setPlayerBoundary();
 
         return false;
     }
