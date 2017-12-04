@@ -12,7 +12,7 @@ public class GameThread extends Thread{
     private SurfaceHolder mSurfaceHolder;
     private GameModel mGameModel;
 
-    private boolean isRunning = false;
+    boolean isRunning = false;
     private boolean isGameOver = false;
 
     public GameThread(GameView gameView, GameModel gameModel) {
@@ -30,12 +30,10 @@ public class GameThread extends Thread{
             if (isGameOver) {
                 this.isRunning = false;
 
-                //Somehow tell the surfaceView to destroy itself and go back to main menu
-                break;
             }
 
 
-            if (mSurfaceHolder.getSurface().isValid()) {
+            if (mSurfaceHolder.getSurface().isValid() && isRunning) {
                 canvas = mSurfaceHolder.lockCanvas();
 
                 if (canvas != null) {

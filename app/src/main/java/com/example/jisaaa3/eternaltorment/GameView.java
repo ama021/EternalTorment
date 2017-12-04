@@ -120,6 +120,12 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
                 if (s instanceof Player) {
                     Player p = (Player) s;
 
+                    if (p.getHealth() <= 0) {
+                        Bitmap bm = BitmapFactory.decodeResource(res, R.drawable.game_over);
+                        canvas.drawBitmap(bm, 1196 - bm.getWidth() / 2, 720 - bm.getHeight() / 2, mPaint);
+                        break;
+                    }
+
                     if(p.getHealth() >= 1){
                         Bitmap heart1 = BitmapFactory.decodeResource(res, heart);
                         canvas.drawBitmap(heart1, 0, 100 , mPaint);
@@ -135,31 +141,11 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
 
                 }
 
-                /*
-                if (s instanceof Player) {
-                    Player p = (Player) s;
-                    if (p.isAnimating()) {
-                        List<Bitmap> animation = p.getAnimation();
-
-                        Iterator<Bitmap> iterator = animation.iterator();
-                        Timer tm = new Timer();
-                        while (iterator.hasNext()) {
-                            Bitmap bm = iterator.next();
-                            canvas.drawBitmap(bm, s.getLocation().x - 200, s.getLocation().y, mPaint);
-
-                            //canvas.drawColor(0, PorterDuff.Mode.CLEAR);
-                            //canvas.drawBitmap(background, -84, 0, mPaint);
-                        }
-
-                        p.setAnimating(false);
-                    }
-                }
-                */
-
                 Bitmap bm = s.getCurrentBitmap();
                 canvas.drawBitmap(bm, s.getLocation().x, s.getLocation().y, mPaint);
-                String test = "testing";
+
             }
+
         }
     }
 }

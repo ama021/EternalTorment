@@ -41,7 +41,7 @@ public class GameModel {
         random = new Random();
         int n = random.nextInt(50);
         n -= 3;
-        if(n <= 0){
+        if(n <= 0 && !mPlayer.isAttacking){
             spriteList.add(new Skeleton(this.mContext, this.mScreensize_x / 2, this.mScreensize_y / 2));
         }
 
@@ -55,7 +55,6 @@ public class GameModel {
             Sprite sprite = iter.next();
 
             if (sprite.update(fps, spriteList)) {
-                mPlayer.decreaseHealth();
 
                 //Collision and game is not over, therefore we need to remove the skeleton
                 iter.remove();

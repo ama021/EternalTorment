@@ -32,7 +32,7 @@ public class Skeleton extends Sprite {
     // Randomized variables
     Random random;
     private int skeletonCoridore = 0;
-    private int shieldSide = 0;
+    int shieldSide = 0;
 
     public Skeleton(Context context, int screensize_x, int scrrensize_y) {
         this.mContext = context;

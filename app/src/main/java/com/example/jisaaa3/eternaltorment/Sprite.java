@@ -97,24 +97,35 @@ public abstract class Sprite {
     public boolean collision_detection(Sprite a, Sprite b) {
 
         if (a instanceof Player) {
-            //Check for player attack collision
+            Player p = (Player) a;
+            if (p.getAttackBoundary().setIntersect(p.getAttackBoundary(), b.spriteHitBox)) {
+                if (p.getSpriteDirection() == "up" && b.getSpriteDirection() == "down") {
+                    if (!p.isSwipeUtoD) {
+                        ((Skeleton) b).die();
+                    }
+                } else if (p.getSpriteDirection() == "down" && b.getSpriteDirection() == "up") {
+                    if (!p.isSwipeUtoD) {
+                        ((Skeleton) b).die();
+                    }
+                } else if (p.getSpriteDirection() == "left" && b.getSpriteDirection() == "right") {
+                    if (!p.isSwipeLtoR) {
+                        ((Skeleton) b).die();
+                    }
+                } else if (p.getSpriteDirection() == "right" && b.getSpriteDirection() == "left") {
+                    if (!p.isSwipeLtoR) {
+                        ((Skeleton) b).die();
+                    }
+                }
+            }
         } else if (a instanceof Skeleton) {
             if (a.spriteHitBox.setIntersect(a.spriteHitBox, b.spriteHitBox)) {
                 ((Skeleton) a).die();
+                ((Player) b).decreaseHealth();
                 Log.d("Collision", "Intersection is true");
             } else {
                 Log.d("Collision", "Intersection is false");
             }
         }
-        //Need to detect collision here. However, due to the spear need to handle that somehow.
-
-        /*
-            member variables in player that define its collision?
-
-            Player will check if the attack hit the skeleton
-
-            Skeleton will check if they have hit the player within their corrected boundaries
-         */
 
         return false;
     }

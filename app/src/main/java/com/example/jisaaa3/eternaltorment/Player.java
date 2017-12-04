@@ -19,8 +19,12 @@ import java.util.List;
 public class Player extends Sprite {
     private static final String TAG = "Player";
 
+    boolean isAttacking;
+
     private Context mContext;
     private Resources resources;
+
+    private List<Sprite> mSpriteList;
 
     private int health;
     private String armorSet;
@@ -29,9 +33,10 @@ public class Player extends Sprite {
     private int screensize_y;
 
     private Rect playerBoundary;
+    private Rect attackBoundary;
 
-    private boolean isSwipeLtoR;
-    private boolean isSwipeUtoD;
+    boolean isSwipeLtoR;
+    boolean isSwipeUtoD;
 
     /*
         This is used to delay the animation. Once the count reaches 0 it will go to the next animation frame
@@ -53,23 +58,19 @@ public class Player extends Sprite {
         setSpriteDirection("down");
 
         this.playerBoundary = new Rect();
+        this.attackBoundary = new Rect();
         setPlayerBoundary();
     }
 
     public boolean update(long fps, List<Sprite> spriteList) {
+        this.mSpriteList = spriteList;
 
-        String test = "testing";
 
-        if (isHit) {
-            health--;
-
-            if (health == 0) {
-                setAlive(false);
-                die();
-                return true;
-            }
+        if (health == 0) {
+            setAlive(false);
+            die();
+            return true;
         }
-
 
         return false;
     }
@@ -97,6 +98,12 @@ public class Player extends Sprite {
                     //Set animation for RtL and do collision detection
                     Log.d(TAG, "Swipe Right to Left");
                 }
+
+                isAttacking = true;
+                setAttackBoundary();
+                check_collision();
+                this.isSwipeLtoR = false;
+                isAttacking = false;
            }
         } else {
             if (getSpriteDirection().equals("left") || getSpriteDirection().equals("right")) {
@@ -113,6 +120,12 @@ public class Player extends Sprite {
                     Log.d(TAG, "Swipe Down to Up");
                 }
             }
+
+            isAttacking = true;
+            setAttackBoundary();
+            check_collision();
+            this.isSwipeUtoD = false;
+            isAttacking = false;
         }
     }
 
@@ -150,10 +163,6 @@ public class Player extends Sprite {
         this.currentBitmap = bm;
         this.setLocation(screensize_x - this.currentBitmap.getWidth() / 2, screensize_y - this.currentBitmap.getHeight() / 2);
 
-    }
-
-    public Bitmap bitmapToDraw() {
-        return this.currentBitmap;
     }
 
     private void setArmorSet(int armorSet) {
@@ -251,11 +260,20 @@ public class Player extends Sprite {
         }
     }
 
-    private void check_collision(List<Sprite> spriteList) {
-        if (isAlive()) {
-            //Figure how to get the sprites and player together and iterate over the skeletons
-            //and do collistion detection.
+    private void check_collision() {
+        Iterator<Sprite> iter = this.mSpriteList.iterator();
+
+        while(iter.hasNext()) {
+            Sprite s = iter.next();
+
+            if (s instanceof Skeleton) {
+                collision_detection(this, s);
+            }
         }
+    }
+
+    public Rect getAttackBoundary() {
+        return this.attackBoundary;
     }
 
     private void setPlayerBoundary() {
@@ -269,6 +287,15 @@ public class Player extends Sprite {
         this.setSpriteHitBox(playerBoundary);
 
         //Log.d(TAG, "Player Boundary x.left " + playerBoundary.left + " top: " + playerBoundary.top + " bottom: " + playerBoundary.bottom + " right: " + playerBoundary.right);
+    }
+
+    private void setAttackBoundary() {
+        attackBoundary.set(
+                (int) getLocation().x - 100,
+                (int) getLocation().y - 100,
+                (int) getLocation().x + currentBitmap.getWidth() + 100,
+                (int) getLocation().y + currentBitmap.getHeight() + 100
+        );
     }
 
     private void die() {
