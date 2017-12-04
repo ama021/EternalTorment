@@ -22,6 +22,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Timer;
 
+import static com.example.jisaaa3.eternaltorment.R.drawable.heart;
+
 /**
  * Created by jisaaa3 on 10/27/2017.
  */
@@ -106,9 +108,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
             canvas.drawARGB(255, 255, 65, 22);
             canvas.drawBitmap(background, -84, 0, mPaint);
 
-
-
-
             List<Sprite> gameObjects = mGameModel.getSpriteList();
 
             //Iterate over the objects and draw them.
@@ -121,8 +120,19 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
                 if (s instanceof Player) {
                     Player p = (Player) s;
 
-                    if (p.getHealth() >= 1) {
+                    if(p.getHealth() >= 1){
+                        Bitmap heart1 = BitmapFactory.decodeResource(res, heart);
+                        canvas.drawBitmap(heart1, 0, 100 , mPaint);
                     }
+                    if(p.getHealth() >= 2){
+                        Bitmap heart2 = BitmapFactory.decodeResource(res, heart);
+                        canvas.drawBitmap(heart2, heart2.getWidth(), 100, mPaint);
+                    }
+                    if(p.getHealth() >= 3){
+                        Bitmap heart3 = BitmapFactory.decodeResource(res, heart);
+                        canvas.drawBitmap(heart3, heart3.getWidth() * 2, 100, mPaint);
+                    }
+
                 }
 
                 /*
