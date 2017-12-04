@@ -49,6 +49,7 @@ public class ArmoryActivity extends Activity {
         ListView listView = (ListView) findViewById(R.id.armory_list);
         listView.setAdapter(listAdapter);
 
+        // Sets onClick for the armory listView
         listView.setOnItemClickListener(
                 new AdapterView.OnItemClickListener(){
                     @Override
@@ -74,6 +75,7 @@ public class ArmoryActivity extends Activity {
         );
 
 
+        // Sets the onClick for the armor selection
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

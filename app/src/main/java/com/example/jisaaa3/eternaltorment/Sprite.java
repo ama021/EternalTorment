@@ -40,6 +40,7 @@ public abstract class Sprite {
         return spriteHitBox;
     }
 
+    // Sets the collision hitbox for player
     public void setSpriteHitBox(Rect spriteHitBox) {
         this.spriteHitBox = spriteHitBox;
     }
@@ -56,16 +57,19 @@ public abstract class Sprite {
         return this.location;
     }
 
+    // Sets the location for any of the sprites x and y values
     public void setLocation(float x, float y) {
         this.location = new Vector2Point();
         this.location.x = x;
         this.location.y = y;
     }
 
+    // Gets the direction all sprites are facing
     public String getSpriteDirection() {
         return spriteDirection;
     }
 
+    // Sets the direction all sprites are facing
     public void setSpriteDirection(String spriteDirection) {
         this.spriteDirection = spriteDirection;
     }
@@ -74,19 +78,22 @@ public abstract class Sprite {
         return type;
     }
 
+    // Sets type of Sprite
     public void setType(String type) {
         this.type = type;
     }
 
-
+    // Returns that the sprite isAlive
     public boolean isAlive() {
         return isAlive;
     }
 
+    // Sets the sprite to alive
     public void setAlive(boolean alive) {
         isAlive = alive;
     }
 
+    // Collision method for any sprite collision
     public boolean collision_detection(Sprite a, Sprite b) {
 
         if (a instanceof Player) {

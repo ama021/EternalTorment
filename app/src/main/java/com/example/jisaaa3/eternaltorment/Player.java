@@ -85,6 +85,7 @@ public class Player extends Sprite {
         return false;
     }
 
+    // Chooses the direction of the player when Dpad is pressed
     public void changeDirection(String direction) {
         setSpriteDirection(direction);
         setBitmapDirection(direction);
@@ -157,10 +158,12 @@ public class Player extends Sprite {
         }
     }
 
+    // When the player is hit loose health
     public void decreaseHealth() {
         this.health--;
     }
 
+    // Gets the health for use in hearts view
     public int getHealth() {
         return this.health;
     }

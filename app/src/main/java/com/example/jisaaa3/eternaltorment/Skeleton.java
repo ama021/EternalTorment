@@ -63,6 +63,7 @@ public class Skeleton extends Sprite {
         return false;
     }
 
+    // Add movement to the skeleton
     private void moveSkeleton() {
         switch (this.getSpriteDirection()) {
             case "left":
@@ -82,18 +83,22 @@ public class Skeleton extends Sprite {
         }
     }
 
+    // Kill the skeleton
     public void die() {
         setAlive(false);
     }
 
+    // Sets the requested bitmap
     public void setCurrentBitmap(Bitmap currentBitmap) {
         this.currentBitmap = currentBitmap;
     }
 
+    // Gets the current bitmap
     public Bitmap getCurrentBitmap() {
         return currentBitmap;
     }
 
+    // Checking the skeletons bounds for collision
     private void setSkeletonBoundary() {
         skeletonBoundary.set(
                 (int) getLocation().x,
@@ -106,6 +111,7 @@ public class Skeleton extends Sprite {
         Log.d(TAG, "Skeleton Boundary x.left " + skeletonBoundary.left + " top: " + skeletonBoundary.top + " bottom: " + skeletonBoundary.bottom + " right: " + skeletonBoundary.right);
     }
 
+    // Uses the random java class to choose the coridore and shield side of the skeleton
     public void random_direction(){
         int n = random.nextInt(4);
         int m = random.nextInt(2);
