@@ -26,9 +26,12 @@ public class MainMenuFragment extends Fragment {
 
     private int mFragmentContainer;
 
+    private int selectedArmor;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.selectedArmor = 0;
 
     }
 
@@ -45,6 +48,7 @@ public class MainMenuFragment extends Fragment {
             public void onClick(View view) {
                 //Start game
                 Intent intent = new Intent(getActivity(), GameActivity.class);
+                intent.putExtra("selectedArmor", selectedArmor);
                 startActivity(intent);
             }
         });

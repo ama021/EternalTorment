@@ -29,9 +29,13 @@ public class GameActivity extends Activity implements
 
     private Button mSwipe;
 
+    private int selectedArmor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        this.selectedArmor = getIntent().getExtras().getInt("selectedArmor", 0);
 
         Display display = getWindowManager().getDefaultDisplay();
 

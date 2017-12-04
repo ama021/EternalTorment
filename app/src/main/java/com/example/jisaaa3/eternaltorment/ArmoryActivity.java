@@ -1,6 +1,7 @@
 package com.example.jisaaa3.eternaltorment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ public class ArmoryActivity extends Activity {
     TextView t;
     TextView textView;
     Button b;
+    int selectedArmor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,9 @@ public class ArmoryActivity extends Activity {
                         String armor = String.valueOf(parent.getItemAtPosition(position));
                         if(armor == "Knight Armor"){
                             textView.setText("This is an armor once wielded by the great knight Lotheric of Cinders. He was a horrid man but his armor was not.\n Health = 1 Heart");
+                            Intent returnIntent = new Intent();
+                            returnIntent.putExtra("selectedArmor", 0);
+                            setResult(Activity.RESULT_OK, returnIntent);
                         }
                         else if(armor == "Glass Armor"){
                             textView.setText("If you know what this armor is used for then you are the only one. Put it on and see how it feels.\n Health = 2 Hearts");
