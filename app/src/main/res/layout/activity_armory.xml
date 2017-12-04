@@ -22,7 +22,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@android:color/holo_green_light">
+            android:background="@color/red">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/armory_recycler_view"
@@ -37,7 +37,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@android:color/holo_blue_bright">
+            android:background="@color/light_orange">
 
         </FrameLayout>
 
@@ -46,6 +46,15 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@android:color/black">
+
+            <Button
+                android:id="@+id/setArmor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|bottom"
+                android:textColor="@color/orange"
+                android:background="@drawable/simple_button_background"
+                android:text="Set Current Armor" />
 
         </FrameLayout>
 
