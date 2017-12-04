@@ -34,14 +34,13 @@ public class Player extends Sprite {
      */
     private int animationFrameTime;
 
-    private Bitmap currentBitmap;
-
     private boolean isHit = false;
     private boolean isAnimating = false;
 
     Player(Context context, int screensize_x, int scrrensize_y) {
         setType("Player");
         this.mContext = context;
+        this.setAlive(true);
         this.health = 3;
         this.screensize_x = screensize_x;
         this.screensize_y = scrrensize_y;
@@ -51,6 +50,7 @@ public class Player extends Sprite {
         setLocation(this.screensize_x - this.currentBitmap.getWidth() / 2, this.screensize_y - this.currentBitmap.getHeight() / 2);
         setSpriteDirection("down");
 
+        this.playerBoundary = new Rect();
         setPlayerBoundary();
     }
 
@@ -167,6 +167,8 @@ public class Player extends Sprite {
                 (int) getLocation().y + currentBitmap.getHeight()
         );
 
-        Log.d(TAG, "Player Boundary" + playerBoundary);
+        this.setSpriteHitBox(playerBoundary);
+
+        Log.d(TAG, "Player Boundary x.left " + playerBoundary.left + " top: " + playerBoundary.top + " bottom: " + playerBoundary.bottom + " right: " + playerBoundary.right);
     }
 }
