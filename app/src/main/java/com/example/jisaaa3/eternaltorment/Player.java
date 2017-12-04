@@ -168,6 +168,5 @@ public class Player extends Sprite {
         );
 
         Log.d(TAG, "Player Boundary" + playerBoundary);
-        Log.d
     }
 }

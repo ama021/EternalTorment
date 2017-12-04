@@ -10,6 +10,16 @@
         android:layout_weight="1"
         android:background="@color/light_dark">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif"
+            android:text="Armory"
+            android:textSize="70dp"
+            android:gravity="center"
+            android:textColor="@color/red"
+            android:id="@+id/armoryText"/>
+
     </LinearLayout>
 
     <LinearLayout
@@ -24,12 +34,10 @@
             android:layout_weight="1"
             android:background="@color/red">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/armory_recycler_view"
+            <ListView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-
-            </android.support.v7.widget.RecyclerView>
+            </ListView>
 
         </FrameLayout>
 

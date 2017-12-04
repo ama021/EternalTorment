@@ -1,6 +1,7 @@
 package com.example.jisaaa3.eternaltorment;
 
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,20 +9,21 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 public class ArmoryActivity extends Activity {
-    private RecyclerView mArmoryRecyclerView;
-    private ArmoryItemAdapter mAdapter;
+    TextView t;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_armory);
 
-        mArmoryRecyclerView = (RecyclerView) findViewById(R.id.armory_recycler_view);
-        mArmoryRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
         updateUI();
+
+        t = (TextView) findViewById(R.id.armoryText);
+        Typeface myCustomFont = Typeface.createFromAsset(getAssets(),"fonts/Blade 2.ttf");
+        t.setTypeface(myCustomFont);
     }
 
     private void updateUI() {
