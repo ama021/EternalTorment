@@ -26,12 +26,14 @@ public class Player extends Sprite {
     //Animation frame 1-5
     private int animationFrame;
     //Animation stall before displaying next frame
-    private int animationFrameTime;
-
+    private int animationFrameTime = 25;
     private int screensize_x;
     private int screensize_y;
 
     private Rect playerBoundary;
+
+    private boolean isSwipeLtoR;
+    private boolean isSwipeUtoD;
 
     /*
         This is used to delay the animation. Once the count reaches 0 it will go to the next animation frame
@@ -72,6 +74,7 @@ public class Player extends Sprite {
 
         if (isAnimating) {
             doAnimation();
+            check_collision(spriteList);
         } else {
             setPlayerBoundary();
         }
@@ -94,9 +97,12 @@ public class Player extends Sprite {
                 if (velocity_x > 0) {
                     //Set animation for LtR and do collision detection
                     //setCurrentBitmap()
-                    check_collision();
+                    this.isAnimating = true;
+                    this.isSwipeLtoR = true;
                     Log.d(TAG, "Swipe Left to right");
                 } else {
+                    this.isAnimating = true;
+                    this.isSwipeLtoR = false;
                     //Set animation for RtL and do collision detection
                     Log.d(TAG, "Swipe Right to Left");
                 }
@@ -105,9 +111,13 @@ public class Player extends Sprite {
             if (getSpriteDirection().equals("left") || getSpriteDirection().equals("right")) {
                 //We are swiping UtD or DtU
                 if (velocity_y > 0) {
+                    this.isAnimating = true;
+                    this.isSwipeUtoD = true;
                     //Set animation for UtD and do collision detection
                     Log.d(TAG, "Swipe Up to Down");
                 } else {
+                    this.isAnimating = true;
+                    this.isSwipeUtoD = false;
                     //Set an
                     // imation for DtU and do collision detection
                     Log.d(TAG, "Swipe Down to Up");
@@ -155,7 +165,7 @@ public class Player extends Sprite {
 
     }
 
-    private void check_collision() {
+    private void check_collision(List<Sprite> spriteList) {
         if (isAlive()) {
             //Figure how to get the sprites and player together and iterate over the skeletons
             //and do collistion detection.
