@@ -25,9 +25,6 @@ public class Player extends Sprite {
     private int health;
     private String armorSet;
 
-    //Animation frame 1-5
-    private int animationFrame;
-    //Animation stall before displaying next frame
     private int screensize_x;
     private int screensize_y;
 
@@ -41,13 +38,11 @@ public class Player extends Sprite {
      */
 
     private boolean isHit = false;
-    private boolean isAnimating = false;
 
     Player(Context context, int screensize_x, int screensize_y, int selectedArmor) {
         setType("Player");
         this.mContext = context;
         this.resources = mContext.getResources();
-        this.health = 3;
         this.setAlive(true);
         this.screensize_x = screensize_x;
         this.screensize_y = screensize_y;
@@ -75,12 +70,6 @@ public class Player extends Sprite {
             }
         }
 
-        if (isAnimating) {
-            doAnimation();
-            check_collision(spriteList);
-        } else {
-            setPlayerBoundary();
-        }
 
         return false;
     }
@@ -101,25 +90,9 @@ public class Player extends Sprite {
                 if (velocity_x > 0) {
                     //Set animation for LtR and do collision detection
                     //setCurrentBitmap()
-                    this.isAnimating = true;
-
-                    if (getSpriteDirection() == "up") {
-                        this.animationFrame = 5;
-                    } else {
-                        this.animationFrame = 1;
-                    }
-
                     this.isSwipeLtoR = true;
                     Log.d(TAG, "Swipe Left to right");
                 } else {
-                    this.isAnimating = true;
-
-                    if (getSpriteDirection() == "up") {
-                        this.animationFrame = 1;
-                    } else {
-                        this.animationFrame = 5;
-                    }
-
                     this.isSwipeLtoR = false;
                     //Set animation for RtL and do collision detection
                     Log.d(TAG, "Swipe Right to Left");
@@ -129,26 +102,11 @@ public class Player extends Sprite {
             if (getSpriteDirection().equals("left") || getSpriteDirection().equals("right")) {
                 //We are swiping UtD or DtU
                 if (velocity_y > 0) {
-                    this.isAnimating = true;
-
-                    if (getSpriteDirection() == "left") {
-                        this.animationFrame = 1;
-                    } else {
-                        this.animationFrame = 5;
-                    }
 
                     this.isSwipeUtoD = true;
                     //Set animation for UtD and do collision detection
                     Log.d(TAG, "Swipe Up to Down");
                 } else {
-                    this.isAnimating = true;
-
-                    if (getSpriteDirection() == "left") {
-                        this.animationFrame = 5;
-                    } else {
-                        this.animationFrame = 1;
-                    }
-
                     this.isSwipeUtoD = false;
                     //Set an
                     // animation for DtU and do collision detection
@@ -168,134 +126,6 @@ public class Player extends Sprite {
         return this.health;
     }
 
-    public boolean isAnimating() {
-        return this.isAnimating;
-    }
-
-    public void setAnimating(boolean isAnimating) {
-        this.isAnimating = isAnimating;
-    }
-
-    private void doAnimation() {
-
-
-            setAnimation();
-
-
-    }
-
-    private void setAnimation() {
-        switch (armorSet) {
-            case "knight":
-                setKnightAnimation();
-                break;
-            case "glass":
-                setGlassAnimation();
-                break;
-            case "blizzard":
-                setBlizzardAnimation();
-                break;
-            default:
-                break;
-        }
-    }
-
-    /*
-        Setting the animation if they are wearing the knight armor set
-     */
-    private void setKnightAnimation() {
-        switch (getSpriteDirection()) {
-            case "left":
-                setKnightLeftFrame();
-                break;
-            case "right":
-                setKnightRightFrame();
-                break;
-            case "up":
-                setKnightUpFrame();
-                break;
-            case "down":
-                setKnightDownFrame();
-                break;
-            default:
-                break;
-        }
-    }
-
-    private void setKnightLeftFrame() {
-
-        switch (this.animationFrame) {
-            case 1:
-                setCurrentBitmap(BitmapFactory.decodeResource(resources, R.drawable.left_knight_attack_1));
-                break;
-            case 2:
-                setCurrentBitmap(BitmapFactory.decodeResource(resources, R.drawable.left_knight_attack_2));
-                break;
-            case 3:
-                setCurrentBitmap(BitmapFactory.decodeResource(resources, R.drawable.left_knight_attack_3));
-                break;
-            case 4:
-                setCurrentBitmap(BitmapFactory.decodeResource(resources, R.drawable.left_knight_attack_4));
-                break;
-            case 5:
-                setCurrentBitmap(BitmapFactory.decodeResource(resources, R.drawable.left_knight_attack_5));
-                break;
-            default:
-                break;
-
-        }
-
-        if (this.isSwipeUtoD) {
-            if (this.animationFrame == 5) {
-                this.isAnimating = false;
-            }
-
-            this.animationFrame++;
-        } else {
-            if (this.animationFrame == 1) {
-                this.isAnimating = false;
-            }
-
-            this.animationFrame--;
-        }
-    }
-
-    public List<Bitmap> getAnimation() {
-        List<Bitmap> animation = new ArrayList<>();
-        animation.add(BitmapFactory.decodeResource(resources, R.drawable.left_knight_attack_1));
-        animation.add(BitmapFactory.decodeResource(resources, R.drawable.left_knight_attack_2));
-        animation.add(BitmapFactory.decodeResource(resources, R.drawable.left_knight_attack_3));
-        animation.add(BitmapFactory.decodeResource(resources, R.drawable.left_knight_attack_4));
-        animation.add(BitmapFactory.decodeResource(resources, R.drawable.left_knight_attack_5));
-        return animation;
-    }
-
-    private void setKnightRightFrame() {
-
-    }
-
-    private void setKnightUpFrame() {
-
-    }
-
-    private void setKnightDownFrame() {
-
-    }
-
-    /*
-        Setting the animation if they are wearing the glass armor set
-     */
-    private void setGlassAnimation() {
-
-    }
-
-    /*
-        Setting the animation if they are wearing the blizzard armor set
-     */
-
-    private void setBlizzardAnimation() {
-
-    }
 
     private void setBitmapDirection(String direction) {
         switch (direction) {

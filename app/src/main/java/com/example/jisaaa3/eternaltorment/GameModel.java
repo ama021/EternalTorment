@@ -32,23 +32,24 @@ public class GameModel {
         spriteList = new ArrayList<>();
         mPlayer = new Player(context, screensize_x/2, screensize_y/2, selectedArmor);
         spriteList.add(mPlayer);
-        spriteList.add(new Skeleton(context, screensize_x / 2, screensize_y / 2));
         String test = "testing";
     }
 
 
     //returns true if the player is dead
     public boolean update(Long fps) {
+        random = new Random();
+        int n = random.nextInt(50);
+        n -= 3;
+        if(n <= 0){
+            spriteList.add(new Skeleton(this.mContext, this.mScreensize_x / 2, this.mScreensize_y / 2));
+        }
 
 
         Iterator<Sprite> iter = spriteList.iterator();
-        random = new Random();
 
-        int n = random.nextInt(99);
-        n -= 4;
-        if(n <= 0){
-            addSkeleton = true;
-        }
+
+
 
         while (iter.hasNext()) {
             Sprite sprite = iter.next();
@@ -68,10 +69,7 @@ public class GameModel {
             }
         }
 
-        if (addSkeleton) {
-            spriteList.add(new Skeleton(this.mContext, this.mScreensize_x, this.mScreensize_y));
-            addSkeleton = false;
-        }
+
 
         return false;
     }

@@ -58,8 +58,6 @@ public class Skeleton extends Sprite {
 
         setSkeletonBoundary();
 
-        this.setLocation(this.getLocation().x, this.getLocation().y + 5);
-
         return false;
     }
 
@@ -67,16 +65,16 @@ public class Skeleton extends Sprite {
     private void moveSkeleton() {
         switch (this.getSpriteDirection()) {
             case "left":
-                this.setLocation(this.getLocation().x + 5, this.getLocation().y);
+                this.setLocation(this.getLocation().x - 10, this.getLocation().y);
                 break;
             case "right":
-                this.setLocation(this.getLocation().x - 5, this.getLocation().y);
+                this.setLocation(this.getLocation().x + 10, this.getLocation().y);
                 break;
             case "up":
-                this.setLocation(this.getLocation().x, this.getLocation().y - 5);
+                this.setLocation(this.getLocation().x, this.getLocation().y - 10);
                 break;
             case "down":
-                this.setLocation(this.getLocation().x, this.getLocation().y + 5);
+                this.setLocation(this.getLocation().x, this.getLocation().y + 10);
                 break;
             default:
                 break;

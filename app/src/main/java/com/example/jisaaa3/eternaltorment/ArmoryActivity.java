@@ -37,8 +37,6 @@ public class ArmoryActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_armory);
 
-        updateUI();
-
         textView = (TextView) findViewById(R.id.armorStatsText);
         imageView = (ImageView) findViewById(R.id.armor_display);
         b = (Button) findViewById(R.id.setArmor);
@@ -108,53 +106,5 @@ public class ArmoryActivity extends Activity {
 
         Typeface myCustomFont3 = Typeface.createFromAsset(getAssets(),"fonts/Blade 2.ttf");
         b.setTypeface(myCustomFont3);
-    }
-
-    private void updateUI() {
-
-
-    }
-
-    private class ArmoryItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
-        public ArmoryItemHolder(View view) {
-            super(view);
-            itemView.setOnClickListener(this);
-        }
-
-        public void bind(ArmoryItem item) {
-
-        }
-
-        @Override
-        public void onClick(View view) {
-            //Show clicked on results in other frame layouts
-            //Broadcast receiver? to let other frame layouts know?
-        }
-    }
-
-    private class ArmoryItemAdapter extends RecyclerView.Adapter<ArmoryItemHolder> {
-
-        public ArmoryItemAdapter() {
-
-        }
-
-        @Override
-        public ArmoryItemHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.armorylist_item, parent, false);
-            return new ArmoryItemHolder(itemView);
-        }
-
-        @Override
-        public void onBindViewHolder(ArmoryItemHolder holder, int poistion) {
-
-        }
-
-        @Override
-        public int getItemCount() {
-            return 5;
-        }
-
-
     }
 }

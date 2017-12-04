@@ -158,6 +158,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
 
                 Bitmap bm = s.getCurrentBitmap();
                 canvas.drawBitmap(bm, s.getLocation().x, s.getLocation().y, mPaint);
+                String test = "testing";
             }
         }
     }
