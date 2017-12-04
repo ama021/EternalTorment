@@ -11,7 +11,7 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:text="@string/credits_text"
-        android:textColor="@android:color/white"
-        android:textSize="24sp"/>
+        android:textColor="@color/light_orange"
+        android:textSize="40dp" />
 
 </LinearLayout>

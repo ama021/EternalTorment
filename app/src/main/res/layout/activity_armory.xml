@@ -35,6 +35,7 @@
             android:background="@color/red">
 
             <ListView
+                android:id="@+id/armory_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
             </ListView>
@@ -46,6 +47,14 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/light_orange">
+
+            <TextView
+                android:id="@+id/armorStatsText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@android:color/black"
+                android:textSize="36.5dp"
+                android:gravity="center"/>
 
         </FrameLayout>
 
@@ -61,6 +70,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|bottom"
                 android:textColor="@color/orange"
+                android:textSize="32dp"
+                android:gravity="center"
                 android:background="@drawable/simple_button_background"
                 android:text="Set Current Armor" />
 
