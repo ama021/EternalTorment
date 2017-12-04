@@ -54,6 +54,8 @@ public class GameModel {
             Sprite sprite = iter.next();
 
             if (sprite.update(fps, spriteList)) {
+                mPlayer.decreaseHealth();
+
                 //Collision and game is not over, therefore we need to remove the skeleton
                 iter.remove();
             }
@@ -99,9 +101,7 @@ public class GameModel {
 
             while (iter.hasNext()) {
                 if (iter.next() instanceof Skeleton) {
-                    Skeleton s = (Skeleton) iter.next();
-                    s.die();
-                    //iter.remove();
+                    iter.remove();
                 }
             }
 

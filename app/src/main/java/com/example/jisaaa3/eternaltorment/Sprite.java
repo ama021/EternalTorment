@@ -93,6 +93,7 @@ public abstract class Sprite {
             //Check for player attack collision
         } else if (a instanceof Skeleton) {
             if (a.spriteHitBox.setIntersect(a.spriteHitBox, b.spriteHitBox)) {
+                ((Skeleton) a).die();
                 Log.d("Collision", "Intersection is true");
             } else {
                 Log.d("Collision", "Intersection is false");

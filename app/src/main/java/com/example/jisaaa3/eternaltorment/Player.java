@@ -156,6 +156,14 @@ public class Player extends Sprite {
         }
     }
 
+    public void decreaseHealth() {
+        this.health--;
+    }
+
+    public int getHealth() {
+        return this.health;
+    }
+
     public boolean isAnimating() {
         return this.isAnimating;
     }

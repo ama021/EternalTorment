@@ -71,6 +71,10 @@ public class Skeleton extends Sprite {
     public boolean update(long fps, List<Sprite> spriteList) {
         collision_detection(this, spriteList.get(0));
 
+        if (!isAlive()) {
+            return true;
+        }
+
         setSkeletonBoundary();
 
         this.setLocation(this.getLocation().x, this.getLocation().y + 5);
@@ -79,7 +83,7 @@ public class Skeleton extends Sprite {
     }
 
     public void die() {
-        //play dying animation
+        setAlive(false);
     }
 
     public void setCurrentBitmap(Bitmap currentBitmap) {
