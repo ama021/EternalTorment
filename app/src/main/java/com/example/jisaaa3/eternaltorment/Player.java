@@ -47,6 +47,7 @@ public class Player extends Sprite {
         setType("Player");
         this.mContext = context;
         this.resources = mContext.getResources();
+        this.health = 3;
         this.setAlive(true);
         this.screensize_x = screensize_x;
         this.screensize_y = screensize_y;
