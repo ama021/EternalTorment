@@ -78,6 +78,13 @@ public class GameActivity extends Activity implements
         mOhShitButton = (Button) findViewById(R.id.ohShitButton);
         Typeface myCustomFont2 = Typeface.createFromAsset(getAssets(),"fonts/Blade 2.ttf");
         mOhShitButton.setTypeface(myCustomFont2);
+
+        mOhShitButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                mGameController.pressedOhShitButton();
+            }
+        });
     }
 
     /*
