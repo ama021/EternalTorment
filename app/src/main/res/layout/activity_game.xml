@@ -79,6 +79,7 @@
         android:layout_height="162dp"
         android:alpha="0.25"
         android:text="Swipe"
+        android:textSize="40dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:background="@color/clear"/>

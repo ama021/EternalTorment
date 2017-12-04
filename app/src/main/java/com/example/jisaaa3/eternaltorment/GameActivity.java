@@ -72,9 +72,12 @@ public class GameActivity extends Activity implements
             }
         });
 
-        mOhShitButton = (Button) findViewById(R.id.ohShitButton);
         Typeface myCustomFont = Typeface.createFromAsset(getAssets(),"fonts/Blade 2.ttf");
-        mOhShitButton.setTypeface(myCustomFont);
+        mSwipe.setTypeface(myCustomFont);
+
+        mOhShitButton = (Button) findViewById(R.id.ohShitButton);
+        Typeface myCustomFont2 = Typeface.createFromAsset(getAssets(),"fonts/Blade 2.ttf");
+        mOhShitButton.setTypeface(myCustomFont2);
     }
 
     /*
