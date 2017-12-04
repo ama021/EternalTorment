@@ -6,7 +6,9 @@
     <string name="fragmentContainer">fragmentContainer</string>
 
     <string name="credits_text">
-        Programmer Guy but hurt ACL-> Adrian Adams\n
-        Just the Asset guy man -> Jared Harden
+        Founded, Produced, Created,\n
+        Directed, Developed by\n
+        Adrian Adams and \n
+        Jared Harden"
     </string>
 </resources>

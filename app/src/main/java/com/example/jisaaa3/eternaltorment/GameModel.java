@@ -39,8 +39,9 @@ public class GameModel {
     //returns true if the player is dead
     public boolean update(Long fps) {
         random = new Random();
-        int n = random.nextInt(50);
-        n -= 3;
+
+        int n = random.nextInt(200);
+        n -= 4;
         if(n <= 0){
             spriteList.add(new Skeleton(this.mContext, this.mScreensize_x / 2, this.mScreensize_y / 2));
         }

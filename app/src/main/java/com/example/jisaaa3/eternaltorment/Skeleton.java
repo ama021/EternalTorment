@@ -71,10 +71,10 @@ public class Skeleton extends Sprite {
                 this.setLocation(this.getLocation().x + 10, this.getLocation().y);
                 break;
             case "up":
-                this.setLocation(this.getLocation().x, this.getLocation().y - 10);
+                this.setLocation(this.getLocation().x, this.getLocation().y - 5);
                 break;
             case "down":
-                this.setLocation(this.getLocation().x, this.getLocation().y + 10);
+                this.setLocation(this.getLocation().x, this.getLocation().y + 5);
                 break;
             default:
                 break;
@@ -111,7 +111,7 @@ public class Skeleton extends Sprite {
 
     // Uses the random java class to choose the coridore and shield side of the skeleton
     public void random_direction(){
-        int n = random.nextInt(4);
+        int n = random.nextInt(16) / 4;
         int m = random.nextInt(2);
 
         Resources r = mContext.getResources();
