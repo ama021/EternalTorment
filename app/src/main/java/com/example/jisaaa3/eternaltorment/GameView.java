@@ -9,6 +9,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.os.SystemClock;
 import android.support.annotation.AttrRes;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -112,6 +114,25 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
 
             while (iter.hasNext()) {
                 Sprite s = iter.next();
+
+                if (s instanceof Player) {
+                    Player p = (Player) s;
+                    if (p.isAnimating()) {
+                        List<Bitmap> animation = p.getAnimation();
+
+                        Iterator<Bitmap> iterator = animation.iterator();
+
+                        while (iterator.hasNext()) {
+                            Bitmap bm = iterator.next();
+                            canvas.drawBitmap(bm, s.getLocation().x - 200, s.getLocation().y, mPaint);
+                            //canvas.drawColor(0, PorterDuff.Mode.CLEAR);
+                            //canvas.drawBitmap(background, -84, 0, mPaint);
+                        }
+
+                        p.setAnimating(false);
+                    }
+                }
+
                 Bitmap bm = s.getCurrentBitmap();
                 canvas.drawBitmap(bm, s.getLocation().x, s.getLocation().y, mPaint);
             }

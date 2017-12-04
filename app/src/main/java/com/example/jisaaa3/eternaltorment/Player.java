@@ -20,6 +20,7 @@ public class Player extends Sprite {
     private static final String TAG = "Player";
 
     private Context mContext;
+    private Resources resources;
 
     private int health;
     private String armorSet;
@@ -27,7 +28,6 @@ public class Player extends Sprite {
     //Animation frame 1-5
     private int animationFrame;
     //Animation stall before displaying next frame
-    private int animationFrameTime = 25;
     private int screensize_x;
     private int screensize_y;
 
@@ -46,6 +46,7 @@ public class Player extends Sprite {
     Player(Context context, int screensize_x, int screensize_y, int selectedArmor) {
         setType("Player");
         this.mContext = context;
+        this.resources = mContext.getResources();
         this.setAlive(true);
         this.screensize_x = screensize_x;
         this.screensize_y = screensize_y;
@@ -60,6 +61,9 @@ public class Player extends Sprite {
     }
 
     public boolean update(long fps, List<Sprite> spriteList) {
+
+        String test = "testing";
+
         if (isHit) {
             health--;
 
@@ -152,21 +156,20 @@ public class Player extends Sprite {
         }
     }
 
+    public boolean isAnimating() {
+        return this.isAnimating;
+    }
+
+    public void setAnimating(boolean isAnimating) {
+        this.isAnimating = isAnimating;
+    }
+
     private void doAnimation() {
 
-        if (this.animationFrameTime != 0) {
-            animationFrameTime =- 1;
-        } else {
-            setAnimation();
-        }
-        //this.setcurrentBitmap = getbm.animationFrame
-        //animationFrame++ % 6
 
-        /*
-        if (animationFrame == 1) {
-            isAnimating = false;
-        }
-        */
+            setAnimation();
+
+
     }
 
     private void setAnimation() {
@@ -208,10 +211,51 @@ public class Player extends Sprite {
     }
 
     private void setKnightLeftFrame() {
-        //this.setCurrentBitmap(BitmapFactory.decodeResource());
-        if (this.isSwipeUtoD) {
+
+        switch (this.animationFrame) {
+            case 1:
+                setCurrentBitmap(BitmapFactory.decodeResource(resources, R.drawable.left_knight_attack_1));
+                break;
+            case 2:
+                setCurrentBitmap(BitmapFactory.decodeResource(resources, R.drawable.left_knight_attack_2));
+                break;
+            case 3:
+                setCurrentBitmap(BitmapFactory.decodeResource(resources, R.drawable.left_knight_attack_3));
+                break;
+            case 4:
+                setCurrentBitmap(BitmapFactory.decodeResource(resources, R.drawable.left_knight_attack_4));
+                break;
+            case 5:
+                setCurrentBitmap(BitmapFactory.decodeResource(resources, R.drawable.left_knight_attack_5));
+                break;
+            default:
+                break;
 
         }
+
+        if (this.isSwipeUtoD) {
+            if (this.animationFrame == 5) {
+                this.isAnimating = false;
+            }
+
+            this.animationFrame++;
+        } else {
+            if (this.animationFrame == 1) {
+                this.isAnimating = false;
+            }
+
+            this.animationFrame--;
+        }
+    }
+
+    public List<Bitmap> getAnimation() {
+        List<Bitmap> animation = new ArrayList<>();
+        animation.add(BitmapFactory.decodeResource(resources, R.drawable.left_knight_attack_1));
+        animation.add(BitmapFactory.decodeResource(resources, R.drawable.left_knight_attack_2));
+        animation.add(BitmapFactory.decodeResource(resources, R.drawable.left_knight_attack_3));
+        animation.add(BitmapFactory.decodeResource(resources, R.drawable.left_knight_attack_4));
+        animation.add(BitmapFactory.decodeResource(resources, R.drawable.left_knight_attack_5));
+        return animation;
     }
 
     private void setKnightRightFrame() {

@@ -36,7 +36,9 @@ public class GameModel {
             if (sprite.update(fps, spriteList)) {
                 //Collision and game is not over, therefore we need to remove the skeleton
                 iter.remove();
-            } else if (sprite instanceof Player) {
+            }
+
+            if (sprite instanceof Player) {
                 Player p = (Player) sprite;
                 if (!p.isAlive()) {
                     return true;
@@ -94,7 +96,5 @@ public class GameModel {
     TODO: Need to complete collision checking and UI for player
     TODO: Implement oh shit button
     TODO: Implement animations and bitmap
-    TODO: Implement drawing of game objects
-    TODO: Implement randomization of skeletons and skeleton game logic
     TODO: Finish player game logic
  */
