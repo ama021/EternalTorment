@@ -1,6 +1,7 @@
 package com.example.jisaaa3.eternaltorment;
 
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -62,7 +63,7 @@ public class MainMenuFragment extends Fragment {
             public void onClick(View view) {
                 //Go to Armory
                 Intent intent = new Intent(getActivity(), ArmoryActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
             }
         });
 
@@ -92,5 +93,14 @@ public class MainMenuFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int requestCode2, Intent data) {
+        if (requestCode == 1) {
+            if (requestCode2 == Activity.RESULT_OK) {
+                this.selectedArmor = data.getExtras().getInt("selectedArmor");
+            }
+        }
     }
 }

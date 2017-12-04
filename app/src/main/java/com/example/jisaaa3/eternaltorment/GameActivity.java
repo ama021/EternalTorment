@@ -43,7 +43,7 @@ public class GameActivity extends Activity implements
 
         Point size = new Point();
         display.getSize(size);
-        mGameModel = new GameModel(this, size.x, size.y);
+        mGameModel = new GameModel(this, size.x, size.y, selectedArmor);
         mGameController = new GameController(mGameModel);
 
         setContentView(R.layout.activity_game);

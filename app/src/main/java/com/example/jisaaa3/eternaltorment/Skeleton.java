@@ -20,7 +20,9 @@ public class Skeleton extends Sprite {
 
     private static final String TAG = "Skeleton";
 
-    private String weak_side;
+
+    private int shield_side;
+    private int skeleton_corridor;
 
     private Rect skeletonBoundary;
 

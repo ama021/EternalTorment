@@ -18,9 +18,9 @@ public class GameModel {
 
     private boolean hasOhShitBeenUsed;
 
-    GameModel(Context context, int screensize_x, int screensize_y) {
+    GameModel(Context context, int screensize_x, int screensize_y, int selectedArmor) {
         spriteList = new ArrayList<>();
-        mPlayer = new Player(context, screensize_x/2, screensize_y/2);
+        mPlayer = new Player(context, screensize_x/2, screensize_y/2, selectedArmor);
         spriteList.add(mPlayer);
         spriteList.add(new Skeleton(context, screensize_x / 2, screensize_y / 2));
         String test = "testing";
@@ -30,8 +30,6 @@ public class GameModel {
     //returns true if the player is dead
     public boolean update(Long fps) {
         Iterator<Sprite> iter = spriteList.iterator();
-
-
 
         while (iter.hasNext()) {
             Sprite sprite = iter.next();
@@ -46,8 +44,6 @@ public class GameModel {
                 }
             }
         }
-
-
         return false;
     }
 
@@ -78,7 +74,7 @@ public class GameModel {
                 if (iter.next() instanceof Skeleton) {
                     Skeleton s = (Skeleton) iter.next();
                     s.die();
-                    iter.remove();
+                    //iter.remove();
                 }
             }
 
@@ -102,8 +98,4 @@ public class GameModel {
     TODO: Implement drawing of game objects
     TODO: Implement randomization of skeletons and skeleton game logic
     TODO: Finish player game logic
-    TODO: Wrap up when game is over and ensure game goes back to main menu
-    TODO: Implement some type of score, number of skeletons killed? Keep high score!
-
-    TODO: Implement armory if have time, focus on game first
  */

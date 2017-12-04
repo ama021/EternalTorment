@@ -22,6 +22,7 @@ public class Player extends Sprite {
     private Context mContext;
 
     private int health;
+    private String armorSet;
 
     //Animation frame 1-5
     private int animationFrame;
@@ -39,20 +40,18 @@ public class Player extends Sprite {
         This is used to delay the animation. Once the count reaches 0 it will go to the next animation frame
      */
 
-
     private boolean isHit = false;
     private boolean isAnimating = false;
 
-    Player(Context context, int screensize_x, int screensize_y) {
+    Player(Context context, int screensize_x, int screensize_y, int selectedArmor) {
         setType("Player");
         this.mContext = context;
         this.setAlive(true);
-        this.health = 3;
         this.screensize_x = screensize_x;
         this.screensize_y = screensize_y;
 
-        Resources r = mContext.getResources();
-        setCurrentBitmap(BitmapFactory.decodeResource(r, R.drawable.down_direction_knight));
+        setArmorSet(selectedArmor);
+
         setLocation(this.screensize_x - this.currentBitmap.getWidth() / 2, this.screensize_y - this.currentBitmap.getHeight() / 2);
         setSpriteDirection("down");
 
@@ -126,11 +125,13 @@ public class Player extends Sprite {
         }
     }
 
-    public Bitmap bitmapToDraw() {
-        return this.currentBitmap;
-    }
-
     private void doAnimation() {
+
+        if (this.animationFrameTime != 0) {
+            animationFrameTime =- 1;
+        } else {
+            setAnimation();
+        }
         //this.setcurrentBitmap = getbm.animationFrame
         //animationFrame++ % 6
 
@@ -140,19 +141,23 @@ public class Player extends Sprite {
         }
     }
 
+    private void setAnimation() {
+
+    }
+
     private void setBitmapDirection(String direction) {
         switch (direction) {
             case "left":
-                setCurrentBitmap(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.left_direction_knight));
+                setLeftBitmapWithArmor();
                 break;
             case "right":
-                setCurrentBitmap(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.right_direction_knight));
+                setRightBitmapWithArmor();
                 break;
             case "up":
-                setCurrentBitmap(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.up_direction_knight));
+                setUpBitmapWithArmor();
                 break;
             case "down":
-                setCurrentBitmap(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.down_direction_knight));
+                setDownBitmapWithArmor();
                 break;
             default:
                 break;
@@ -165,15 +170,110 @@ public class Player extends Sprite {
 
     }
 
+    public Bitmap bitmapToDraw() {
+        return this.currentBitmap;
+    }
+
+    private void setArmorSet(int armorSet) {
+        Resources r = mContext.getResources();
+
+        switch (armorSet) {
+            case 0:
+                this.armorSet = "knight";
+                this.health = 1;
+                setCurrentBitmap(BitmapFactory.decodeResource(r, R.drawable.down_direction_knight));
+                break;
+            case 1:
+                this.armorSet = "glass";
+                this.health = 2;
+                setCurrentBitmap(BitmapFactory.decodeResource(r, R.drawable.down_knight_glass));
+                break;
+            case 2:
+                this.armorSet = "blizzard";
+                this.health = 3;
+                setCurrentBitmap(BitmapFactory.decodeResource(r, R.drawable.down_knight_arctic));
+                break;
+            default:
+                this.armorSet = "knight";
+                this.health = 1;
+                setCurrentBitmap(BitmapFactory.decodeResource(r, R.drawable.down_direction_knight));
+                break;
+        }
+    }
+
+    private void setLeftBitmapWithArmor() {
+        switch (this.armorSet) {
+            case "knight":
+                setCurrentBitmap(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.left_direction_knight));
+                break;
+            case "glass":
+                setCurrentBitmap(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.left_direction_knight_glass));
+                break;
+            case "blizzard":
+                setCurrentBitmap(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.left_direction_knight_arctic));
+                break;
+            default:
+                setCurrentBitmap(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.left_direction_knight));
+                break;
+        }
+    }
+
+    private void setRightBitmapWithArmor() {
+        switch (this.armorSet) {
+            case "knight":
+                setCurrentBitmap(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.right_direction_knight));
+                break;
+            case "glass":
+                setCurrentBitmap(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.right_direction_knight_glass));
+                break;
+            case "blizzard":
+                setCurrentBitmap(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.right_direction_knight_arctic));
+                break;
+            default:
+                setCurrentBitmap(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.right_direction_knight));
+                break;
+        }
+    }
+
+    private void setUpBitmapWithArmor() {
+        switch (this.armorSet) {
+            case "knight":
+                setCurrentBitmap(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.up_direction_knight));
+                break;
+            case "glass":
+                setCurrentBitmap(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.up_direction_knight_glass));
+                break;
+            case "blizzard":
+                setCurrentBitmap(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.up_direction_knight_arctic));
+                break;
+            default:
+                setCurrentBitmap(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.up_direction_knight));
+                break;
+        }
+    }
+
+    private void setDownBitmapWithArmor() {
+        switch (this.armorSet) {
+            case "knight":
+                setCurrentBitmap(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.down_direction_knight));
+                break;
+            case "glass":
+                setCurrentBitmap(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.down_knight_glass));
+                break;
+            case "blizzard":
+                setCurrentBitmap(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.down_knight_arctic));
+                break;
+            default:
+                setCurrentBitmap(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.down_direction_knight));
+                break;
+        }
+    }
+
     private void check_collision(List<Sprite> spriteList) {
         if (isAlive()) {
             //Figure how to get the sprites and player together and iterate over the skeletons
             //and do collistion detection.
         }
-    }
-
-    private void die() {
-        //setCurrentBitmap(bm.dead);
     }
 
     private void setPlayerBoundary() {
@@ -186,6 +286,10 @@ public class Player extends Sprite {
 
         this.setSpriteHitBox(playerBoundary);
 
-        Log.d(TAG, "Player Boundary x.left " + playerBoundary.left + " top: " + playerBoundary.top + " bottom: " + playerBoundary.bottom + " right: " + playerBoundary.right);
+        //Log.d(TAG, "Player Boundary x.left " + playerBoundary.left + " top: " + playerBoundary.top + " bottom: " + playerBoundary.bottom + " right: " + playerBoundary.right);
+    }
+
+    private void die() {
+        //setCurrentBitmap(bm.dead);
     }
 }
