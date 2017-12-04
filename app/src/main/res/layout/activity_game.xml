@@ -84,13 +84,17 @@
         android:background="@color/clear"/>
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
+        android:id="@+id/ohShitButton"
+        android:layout_width="1000px"
+        android:layout_height="200px"
+        android:gravity="center"
+        android:text="OH SHIT BUTTON"
+        android:textSize="40dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/simple_button_background"
+        android:textColor="@color/light_orange"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="6dp"
-        android:text="Button" />
+        android:layout_alignParentEnd="true" />
 
 
 </RelativeLayout>

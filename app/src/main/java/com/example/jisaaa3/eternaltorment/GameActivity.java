@@ -3,6 +3,7 @@ package com.example.jisaaa3.eternaltorment;
 import android.app.Activity;
 import android.graphics.Canvas;
 import android.graphics.Point;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ public class GameActivity extends Activity implements
     private Button mDpad_down;
 
     private Button mSwipe;
+    private Button mOhShitButton;
 
     private int selectedArmor;
 
@@ -69,6 +71,10 @@ public class GameActivity extends Activity implements
                 return false;
             }
         });
+
+        mOhShitButton = (Button) findViewById(R.id.ohShitButton);
+        Typeface myCustomFont = Typeface.createFromAsset(getAssets(),"fonts/Blade 2.ttf");
+        mOhShitButton.setTypeface(myCustomFont);
     }
 
     /*

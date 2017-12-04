@@ -15,6 +15,7 @@ public class GameModel {
     private List<Sprite> spriteList;
     private Player mPlayer;
 
+
     private boolean hasOhShitBeenUsed;
 
     GameModel(Context context, int screensize_x, int screensize_y) {

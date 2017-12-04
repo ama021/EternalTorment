@@ -64,6 +64,12 @@
             android:layout_weight="1"
             android:background="@android:color/black">
 
+            <ImageView
+                android:id="@+id/armor_display"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="top"/>
+
             <Button
                 android:id="@+id/setArmor"
                 android:layout_width="match_parent"
