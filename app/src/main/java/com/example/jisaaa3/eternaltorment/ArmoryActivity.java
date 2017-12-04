@@ -54,17 +54,17 @@ public class ArmoryActivity extends Activity {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id){
                         String armor = String.valueOf(parent.getItemAtPosition(position));
                         if(armor == "Knight Armor"){
-                            textView.setText("This is an armor once wielded by the great knight Lotheric of Cinders. He was a horrid man but his armor was not.");
+                            textView.setText("This is an armor once wielded by the great knight Lotheric of Cinders. He was a horrid man but his armor was not.\n Health = 1 Heart");
                             imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.down_direction_knight));
                             selectedArmor = 0;
                         }
                         else if(armor == "Glass Armor"){
-                            textView.setText("If you know what this armor is used for then you are the only one. Put it on and see how it feels.");
+                            textView.setText("If you know what this armor is used for then you are the only one. Put it on and see how it feels.\n Health = 2 Hearts");
                             imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.down_knight_glass));
                             selectedArmor = 1;
                         }
                         else{
-                            textView.setText("An armor reviered by all warriors in the northern most real of Albion, for this armor will not let its user feal a chill.");
+                            textView.setText("An armor reviered by all warriors in the northern most real of Albion, for this armor will not let its user feal a chill.\n Health = 3 Hearts");
                             imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.down_knight_arctic));
                             selectedArmor = 2;
                         }
