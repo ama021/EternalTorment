@@ -16,6 +16,7 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -107,13 +108,13 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
 
             //Iterate over the objects and draw them.
 
-            Player p = (Player) gameObjects.get(0);
-            Bitmap bm = p.bitmapToDraw();
-            canvas.drawBitmap(bm, p.getLocation().x, p.getLocation().y, mPaint);
+            Iterator<Sprite> iter = gameObjects.iterator();
 
-            Skeleton s = (Skeleton) gameObjects.get(1);
-            Bitmap bm2 = s.getCurrentBitmap();
-            canvas.drawBitmap(bm2, s.getLocation().x, s.getLocation().y, mPaint);
+            while (iter.hasNext()) {
+                Sprite s = iter.next();
+                Bitmap bm = s.getCurrentBitmap();
+                canvas.drawBitmap(bm, s.getLocation().x, s.getLocation().y, mPaint);
+            }
         }
     }
 }

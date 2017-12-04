@@ -135,10 +135,11 @@ public class Player extends Sprite {
         //this.setcurrentBitmap = getbm.animationFrame
         //animationFrame++ % 6
 
-
+        /*
         if (animationFrame == 1) {
             isAnimating = false;
         }
+        */
     }
 
     private void setAnimation() {
