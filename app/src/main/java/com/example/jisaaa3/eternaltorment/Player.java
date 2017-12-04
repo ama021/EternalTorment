@@ -60,7 +60,6 @@ public class Player extends Sprite {
     }
 
     public boolean update(long fps, List<Sprite> spriteList) {
-
         if (isHit) {
             health--;
 
@@ -97,10 +96,24 @@ public class Player extends Sprite {
                     //Set animation for LtR and do collision detection
                     //setCurrentBitmap()
                     this.isAnimating = true;
+
+                    if (getSpriteDirection() == "up") {
+                        this.animationFrame = 5;
+                    } else {
+                        this.animationFrame = 1;
+                    }
+
                     this.isSwipeLtoR = true;
                     Log.d(TAG, "Swipe Left to right");
                 } else {
                     this.isAnimating = true;
+
+                    if (getSpriteDirection() == "up") {
+                        this.animationFrame = 1;
+                    } else {
+                        this.animationFrame = 5;
+                    }
+
                     this.isSwipeLtoR = false;
                     //Set animation for RtL and do collision detection
                     Log.d(TAG, "Swipe Right to Left");
@@ -111,14 +124,28 @@ public class Player extends Sprite {
                 //We are swiping UtD or DtU
                 if (velocity_y > 0) {
                     this.isAnimating = true;
+
+                    if (getSpriteDirection() == "left") {
+                        this.animationFrame = 1;
+                    } else {
+                        this.animationFrame = 5;
+                    }
+
                     this.isSwipeUtoD = true;
                     //Set animation for UtD and do collision detection
                     Log.d(TAG, "Swipe Up to Down");
                 } else {
                     this.isAnimating = true;
+
+                    if (getSpriteDirection() == "left") {
+                        this.animationFrame = 5;
+                    } else {
+                        this.animationFrame = 1;
+                    }
+
                     this.isSwipeUtoD = false;
                     //Set an
-                    // imation for DtU and do collision detection
+                    // animation for DtU and do collision detection
                     Log.d(TAG, "Swipe Down to Up");
                 }
             }
@@ -143,6 +170,74 @@ public class Player extends Sprite {
     }
 
     private void setAnimation() {
+        switch (armorSet) {
+            case "knight":
+                setKnightAnimation();
+                break;
+            case "glass":
+                setGlassAnimation();
+                break;
+            case "blizzard":
+                setBlizzardAnimation();
+                break;
+            default:
+                break;
+        }
+    }
+
+    /*
+        Setting the animation if they are wearing the knight armor set
+     */
+    private void setKnightAnimation() {
+        switch (getSpriteDirection()) {
+            case "left":
+                setKnightLeftFrame();
+                break;
+            case "right":
+                setKnightRightFrame();
+                break;
+            case "up":
+                setKnightUpFrame();
+                break;
+            case "down":
+                setKnightDownFrame();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void setKnightLeftFrame() {
+        //this.setCurrentBitmap(BitmapFactory.decodeResource());
+        if (this.isSwipeUtoD) {
+
+        }
+    }
+
+    private void setKnightRightFrame() {
+
+    }
+
+    private void setKnightUpFrame() {
+
+    }
+
+    private void setKnightDownFrame() {
+
+    }
+
+    /*
+        Setting the animation if they are wearing the glass armor set
+     */
+    private void setGlassAnimation() {
+
+    }
+
+    /*
+        Setting the animation if they are wearing the blizzard armor set
+     */
+
+    private void setBlizzardAnimation() {
 
     }
 

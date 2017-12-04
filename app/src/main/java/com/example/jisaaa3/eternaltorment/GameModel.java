@@ -15,20 +15,19 @@ public class GameModel {
     private List<Sprite> spriteList;
     private Player mPlayer;
 
-
     private boolean hasOhShitBeenUsed;
 
     GameModel(Context context, int screensize_x, int screensize_y, int selectedArmor) {
         spriteList = new ArrayList<>();
         mPlayer = new Player(context, screensize_x/2, screensize_y/2, selectedArmor);
         spriteList.add(mPlayer);
-        spriteList.add(new Skeleton(context, screensize_x / 2, screensize_y / 2));
-        String test = "testing";
     }
 
 
     //returns true if the player is dead
     public boolean update(Long fps) {
+
+
         Iterator<Sprite> iter = spriteList.iterator();
 
         while (iter.hasNext()) {
